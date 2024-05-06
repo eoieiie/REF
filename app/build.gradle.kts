@@ -1,6 +1,6 @@
 plugins {
-    alias(libs.plugins.androidApplication)
-    alias(libs.plugins.jetbrainsKotlinAndroid)
+    alias(libs.plugins.androidApplication) // id("com.android.application")
+    alias(libs.plugins.jetbrainsKotlinAndroid) // id("org.jetbrains.kotlin.android")
 }
 
 android {
@@ -38,6 +38,17 @@ android {
 }
 
 dependencies {
+    // Retrofit
+    implementation(libs.retrofit) // implementation("com.squareup.retrofit2:retrofit:2.11.0")
+    implementation(libs.gson) // implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+
+    // Okhttp
+    // define a BOM and its version
+    // implementation(platform("com.squareup.okhttp3:okhttp-bom:4.12.0"))
+
+    // define any required OkHttp artifacts without version
+    implementation(libs.okhttp) // implementation("com.squareup.okhttp3:okhttp") // implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation(libs.loging.interceptor) // implementation("com.squareup.okhttp3:logging-interceptor") // implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
