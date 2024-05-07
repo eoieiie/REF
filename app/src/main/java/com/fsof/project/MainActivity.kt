@@ -7,7 +7,9 @@ import com.fsof.project.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewBinding : ActivityMainBinding
+
     //sorry this was my branch
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
