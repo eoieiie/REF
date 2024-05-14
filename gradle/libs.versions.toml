@@ -1,12 +1,12 @@
 [versions]
 agp = "8.3.2"
-kotlin = "1.9.10"
-coreKtx = "1.13.0"
+kotlin = "1.9.24" # koltin = "1.9.10"
+coreKtx = "1.13.1"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 appcompat = "1.6.1"
-material = "1.11.0"
+material = "1.12.0"
 activity = "1.9.0"
 constraintlayout = "2.1.4"
 
@@ -14,7 +14,7 @@ retrofit = "2.11.0" # gson = "2.11.0"
 okhttp = "4.12.0" # interceptor = "4.12.0"
 
 room = "2.6.1"
-ksp = "1.9.23-1.0.20"
+ksp = "1.9.24-1.0.20"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
