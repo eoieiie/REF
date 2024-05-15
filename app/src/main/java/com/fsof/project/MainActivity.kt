@@ -11,7 +11,7 @@ import java.util.Stack
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding : ActivityMainBinding  //변수이름을 ViewBinding -> binding으로 수정
+    private lateinit var binding: ActivityMainBinding  //변수이름을 ViewBinding -> binding으로 수정
     private val fragmentBackStack: Stack<Fragment> = Stack()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,43 +23,39 @@ class MainActivity : AppCompatActivity() {
             binding.bottomNavigationView.selectedItemId = R.id.fragment_list //기본화면을 리스트로 설정함!
         }
     }
+
     private fun setBottomNavigationView() {
-        binding.bottomNavigationView.setOnItemReselectedListener { item ->
+        binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
 
                 R.id.fragment_camera -> {
-                    supportFragmentManager.beginTransaction().replace(
-                        R.id.main_frame,
-                        CameraFragment()
-                    ).commit()
+                    replaceFragment(CameraFragment())
                     true
                 }
 
                 R.id.fragment_list -> {
-                    supportFragmentManager.beginTransaction().replace(
-                        R.id.main_frame,
-                        ListFragment()
-                    ).commit()
+                    replaceFragment(ListFragment())
                     true
                 }
 
                 R.id.fragment_mypage -> {
-                    supportFragmentManager.beginTransaction().replace(
-                        R.id.main_frame,
-                        MypageFragment()
-                    ).commit()
+                    replaceFragment(MypageFragment())
                     true
                 }
 
                 R.id.fragment_recommend -> {
-                    supportFragmentManager.beginTransaction().replace(
-                        R.id.main_frame,
-                        RecommendFragment()
-                    ).commit()
+                    replaceFragment(RecommendFragment())
                     true
                 }
                 else -> false
             }
         }
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
+        supportFragmentManager.beginTransaction().replace(
+            R.id.main_frame,
+            fragment
+        ).commit()
     }
 }
