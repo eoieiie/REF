@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/fragment_camera"
+        android:title="1"
+        android:icon="@drawable/camera_icon"/>
+    <item
+        android:id="@+id/fragment_list"
+        android:title="2"
+        android:icon="@drawable/refr_icon"/>
+    <item
+        android:id="@+id/fragment_recommend"
+        android:title="3"
+        android:icon="@drawable/ai_icon"/>
+    <item
+        android:id="@+id/fragment_mypage"
+        android:title="4"
+        android:icon="@drawable/acc_icon"/>
+</menu>
