@@ -1,9 +1,7 @@
 package com.fsof.project
 
-import CameraFragment
 import ListFragment
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.fsof.project.databinding.ActivityMainBinding
