@@ -1,35 +1,28 @@
-package com.fsof.project
-
-import CameraFragment2
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.fsof.project.databinding.FragmentCameraBinding
+import com.fsof.project.databinding.FragmentCamera3Binding
 
-class CameraFragment : Fragment() {
+class CameraFragment3 : Fragment() {
 
-    private var _binding: FragmentCameraBinding? = null
+    private var _binding: FragmentCamera3Binding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentCameraBinding.inflate(inflater, container, false)
+        _binding = FragmentCamera3Binding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnNext.setOnClickListener {
-            val cameraFragment2 = CameraFragment2()
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.main_frame, cameraFragment2)
-                .addToBackStack(null)
-                .commit()
+        binding.btnBack.setOnClickListener {
+            parentFragmentManager.popBackStack()
         }
     }
 
