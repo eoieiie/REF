@@ -1,9 +1,14 @@
-package com.fsof.project
+package com.fsof.project.view.activity
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.fsof.project.view.fragment.list.ListFragment
+import com.fsof.project.view.fragment.mypage.MypageFragment
+import com.fsof.project.R
+import com.fsof.project.view.fragment.recommend.RecommendFragment
 import com.fsof.project.databinding.ActivityMainBinding
+import com.fsof.project.view.fragment.camera.CameraFragment
 
 class MainActivity : AppCompatActivity() {
 
