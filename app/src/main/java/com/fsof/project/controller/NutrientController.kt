@@ -1,6 +1,6 @@
 package com.fsof.project.controller
 
-import com.fsof.project.model.Input.Input
+import com.fsof.project.model.input.Input
 import com.fsof.project.model.Nutrient.Ingredient
 import com.fsof.project.controller.service.NutrientsService
 import retrofit2.Call

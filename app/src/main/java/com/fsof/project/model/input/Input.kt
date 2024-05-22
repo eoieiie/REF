@@ -1,4 +1,4 @@
-package com.fsof.project.model.Input
+package com.fsof.project.model.input
 
 import com.google.gson.annotations.SerializedName
 
@@ -7,5 +7,5 @@ data class Input(
     @SerializedName("weight") val weight: String,
     @SerializedName("isFreezed") val isFreezed: Boolean,
     @SerializedName("up") val up: String,
-    @SerializedName("expiration") val expiration: String,
+    @SerializedName("expiration") val expiration: String
 )
