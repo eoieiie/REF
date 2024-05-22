@@ -11,6 +11,6 @@
     <string name="mypagemain">마이페이지메인화면</string>
     <string name="recommendpagemain">추천메인화면</string>
     <string name="edit">정보수정하기</string>
-    <string name="camerawork">카메라동작</string>
+    <string name="camerawork">카메라동작,,찍고다음화면으로넘어가는거</string>
     <string name="back">Back</string>
 </resources>

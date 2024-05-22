@@ -23,8 +23,17 @@ class CameraFragment2 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.btnBack.setOnClickListener {
+        binding.btnRetake.setOnClickListener {
+            // Go back to com.fsof.project.CameraFragment when btnRetake is clicked
             parentFragmentManager.popBackStack()
+        }
+
+        binding.btnSave.setOnClickListener {
+            val cameraFragment3 = CameraFragment3()
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.main_frame, cameraFragment3)
+                .addToBackStack(null)
+                .commit()
         }
     }
 
