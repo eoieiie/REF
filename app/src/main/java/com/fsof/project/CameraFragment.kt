@@ -1,10 +1,10 @@
 package com.fsof.project
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.fsof.project.databinding.FragmentCameraBinding
 
 class CameraFragment : Fragment() {
