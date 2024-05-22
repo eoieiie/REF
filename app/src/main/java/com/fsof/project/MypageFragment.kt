@@ -1,10 +1,10 @@
 package com.fsof.project
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import com.fsof.project.databinding.FragmentMypageBinding
 
 class MypageFragment : Fragment() {
@@ -18,9 +18,6 @@ class MypageFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentMypageBinding.inflate(inflater, container, false)
-
-        // 여기에 MypageFragment의 기능을 구현하면 됩니다.
-
         return binding.root
     }
 

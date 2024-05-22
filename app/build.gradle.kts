@@ -50,6 +50,10 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
+    // TFLite
+    implementation(libs.tflite)
+    implementation(libs.tflite.support)
+
     // RoomDB
     implementation(libs.room.runtime) // implementation("androidx.room:room-runtime:2.6.1")
     implementation(libs.room.ktx) // implementation("androidx.room:room-ktx:2.6.1")

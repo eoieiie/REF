@@ -1,6 +1,5 @@
 package com.fsof.project
 
-import CameraFragment2
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
