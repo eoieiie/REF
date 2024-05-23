@@ -1,8 +1,16 @@
 package com.fsof.project.utils
 // Secret.kt 로 변경 예정
-object API {
-    const val api_Key: String = ""
+object APIs {
+    const val API_KEY: String = ""
     const val BASE_URL: String = "https://localhost:8000/" // 배포 후 수정
     const val NUTRIENTS: String = "nutrients" // http://localhost:8000/nutrients
     const val RECIPES: String = "recipes" // http://localhost:8000/recipes
+}
+
+object BuildConfig {
+    const val DEBUG: Boolean = true
+    const val APPLICATION_ID: String = "com.fsof.project"
+    const val BUILD_TYPE: String = "debug"
+    const val VERSION_CODE: Int = 1
+    const val VERSION_NAME: String = "1.0"
 }

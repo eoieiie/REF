@@ -1,6 +1,6 @@
 package com.fsof.project.controller.service
 
-import com.fsof.project.utils.API
+import com.fsof.project.utils.APIs
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
@@ -8,6 +8,6 @@ import com.fsof.project.model.input.Input
 import com.fsof.project.model.Nutrient.Ingredient
 
 interface NutrientsService {
-    @POST(API.NUTRIENTS)
+    @POST(APIs.NUTRIENTS)
     /*suspend*/ fun createNutrients(@Body items: Input): Call<Ingredient>
 }

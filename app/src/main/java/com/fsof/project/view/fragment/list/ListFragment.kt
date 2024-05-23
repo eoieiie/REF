@@ -27,7 +27,7 @@ class ListFragment : Fragment() {
         binding.buttonAdd.setOnClickListener {
             val listFragment2 = ListFragment2()
             parentFragmentManager.beginTransaction()
-                .replace(R.id.main_frame, listFragment2)
+//                .replace(R.id.main_frame, listFragment2)
                 .addToBackStack(null)
                 .commit()
         }

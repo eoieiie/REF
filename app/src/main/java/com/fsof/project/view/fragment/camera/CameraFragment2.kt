@@ -25,7 +25,6 @@ class CameraFragment2 : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         binding.btnRetake.setOnClickListener {
-            // Go back to com.fsof.project.view.fragment.camera.CameraFragment when btnRetake is clicked
             parentFragmentManager.popBackStack()
         }
 
