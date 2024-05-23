@@ -1,15 +1,15 @@
-package com.fsof.project
+package com.fsof.project.view.fragment.mypage
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.fsof.project.databinding.FragmentRecommendBinding
+import com.fsof.project.databinding.FragmentMypageBinding
 
-class RecommendFragment : Fragment() {
+class MypageFragment : Fragment() {
 
-    private var _binding: FragmentRecommendBinding? = null
+    private var _binding: FragmentMypageBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -17,7 +17,7 @@ class RecommendFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentRecommendBinding.inflate(inflater, container, false)
+        _binding = FragmentMypageBinding.inflate(inflater, container, false)
         return binding.root
     }
 

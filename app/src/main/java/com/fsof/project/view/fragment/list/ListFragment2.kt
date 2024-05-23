@@ -1,4 +1,4 @@
-package com.fsof.project
+package com.fsof.project.view.fragment.list
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

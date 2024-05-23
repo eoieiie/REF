@@ -1,8 +1,13 @@
-package com.fsof.project
+package com.fsof.project.view.activity
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import com.fsof.project.view.fragment.list.ListFragment
+import com.fsof.project.view.fragment.mypage.MypageFragment
+import com.fsof.project.R
+import com.fsof.project.view.fragment.recommend.RecommendFragment
 import com.fsof.project.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
@@ -25,7 +30,7 @@ class MainActivity : AppCompatActivity() {
         binding.bottomNavigationView.setOnItemSelectedListener { item ->
             when (item.itemId) {
                 R.id.fragment_camera -> {
-                    replaceFragment(CameraFragment())
+                    startActivity(Intent(this@MainActivity, CameraActivity::class.java)) // replaceFragment(CameraFragment())
                     true
                 }
 

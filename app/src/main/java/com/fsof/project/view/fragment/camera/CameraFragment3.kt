@@ -1,4 +1,4 @@
-package com.fsof.project
+package com.fsof.project.view.fragment.camera
 
 import android.os.Bundle
 import android.view.LayoutInflater
