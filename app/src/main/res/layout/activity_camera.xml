@@ -22,7 +22,7 @@
     <ImageView
         android:id="@+id/image_photo"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
+        android:layout_height="300dp"
         android:scaleType="centerCrop"
         android:layout_below="@id/btnBack"/>
 
@@ -49,13 +49,61 @@
         android:background="@drawable/rounded_edittext"
         android:padding="10dp"/>
 
+    <!-- 라디오그룹 텍스트 라벨 -->
+    <TextView
+        android:id="@+id/radioGroupNameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editIngredientName"
+        android:text="보관 장소"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <!-- 라디오 버튼 선택 필드 -->
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/radioGroupNameLabel"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <RadioButton
+            android:id="@+id/leftRadioButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="@drawable/btn_segmented_left"
+            android:button="@android:color/transparent"
+            android:gravity="center"
+            android:text="냉장"
+            android:textColor="#000000" />
+
+        <RadioButton
+            android:id="@+id/rightRadioButton"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"
+            android:background="@drawable/btn_segmented_right"
+            android:button="@android:color/transparent"
+            android:gravity="center"
+            android:text="냉동"
+            android:textColor="#000000" />
+    </RadioGroup>
+
     <!-- 등록 날짜 텍스트 라벨 -->
     <TextView
         android:id="@+id/textRegistrationDateLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="등록 날짜"
-        android:layout_below="@id/editIngredientName"
+        android:layout_below="@id/radioGroup"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"/>
 
@@ -78,7 +126,7 @@
         android:id="@+id/textExpirationDateLabel"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="소비기한"
+        android:text="소비 기한"
         android:layout_below="@id/editRegistrationDate"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"/>
@@ -109,8 +157,22 @@
 
     <!-- 재고 입력 필드 -->
     <EditText
-        android:id="@+id/editStock"
-        android:layout_width="match_parent"
+        android:id="@+id/editStockValue"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textStockLabel"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="-1dp"
+        android:layout_marginEnd="16dp"
+        android:background="@drawable/rounded_edittext"
+        android:hint="재고"
+        android:inputType="number"
+        android:padding="10dp" />
+
+    <!-- 재고 입력 필드 -->
+    <EditText
+        android:id="@+id/editStockAmoount"
+        android:layout_width="180dp"
         android:layout_height="wrap_content"
         android:layout_below="@id/textStockLabel"
         android:layout_marginStart="16dp"
@@ -129,14 +191,4 @@
         android:layout_margin="16dp"
         android:layout_alignParentEnd="true"
         android:layout_alignParentTop="true"/>
-
-    <TextView
-        android:id="@+id/text_result"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/editStock"
-        android:layout_margin="16dp"
-        android:textSize="20sp"
-        android:textColor="@color/black"
-        tools:text="none" />
 </RelativeLayout>

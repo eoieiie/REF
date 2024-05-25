@@ -7,7 +7,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -20,6 +19,9 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 //import android.util.Log
+
+import com.fsof.project.R
+import kotlin.math.exp
 
 class CameraActivity : AppCompatActivity() {
 
@@ -53,6 +55,9 @@ class CameraActivity : AppCompatActivity() {
             }
         }
     private val dateFormat = SimpleDateFormat("yy-MM-dd", Locale.getDefault())
+    private var isFreezed: Boolean = false
+    private var up: String = dateFormat.format(Calendar.getInstance().time)
+    private var expiration: String = dateFormat.format(Calendar.getInstance().time)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,12 +72,33 @@ class CameraActivity : AppCompatActivity() {
                 }
 //            }
 
-            // date picker
-            editRegistrationDate.text = dateFormat.format(Calendar.getInstance().time)
-            editExpirationDate.text = dateFormat.format(Calendar.getInstance().time)
+            // name
+
+            // Weight
+
+            // isFreezed
+            radioGroup.setOnCheckedChangeListener { radioGroup, radioButtonID ->
+                when (radioButtonID) {
+                    R.id.rightRadioButton -> {
+                        isFreezed = true
+                    }
+                    R.id.rightRadioButton -> {
+                        isFreezed = false
+                    }
+                }
+//                Log.d("Radio", "$isFreezed")
+            }
+
+            // up
+            editRegistrationDate.text = up
+
+            // expiration
+            editExpirationDate.text = expiration
             editExpirationDate.setOnClickListener {
                 showDatePickerDialog()
             }
+
+
         }
     }
 
@@ -104,9 +130,9 @@ class CameraActivity : AppCompatActivity() {
             this,
             { _, selectedYear, selectedMonth, selectedDay ->
                 calendar.set(selectedYear, selectedMonth, selectedDay)
-                val selectedDate = dateFormat.format(calendar.time)
-                Log.d("calendar", selectedDate)
-                binding.editExpirationDate.text = selectedDate
+//                Log.d("calendar", dateFormat.format(calendar.time))
+                binding.editExpirationDate.text = dateFormat.format(calendar.time)
+                expiration = dateFormat.format(calendar.time)
             },
             calendar.get(Calendar.YEAR),
             calendar.get(Calendar.MONTH),
