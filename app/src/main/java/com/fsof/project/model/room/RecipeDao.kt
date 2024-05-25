@@ -7,16 +7,16 @@ import androidx.room.Query
 import androidx.room.Update
 
 @Dao
-interface AppDao {
+interface RecipeDao {
 //    @Query("SELECT * FROM ingredients")
-//    fun getAll(): List<Ingredients>
+//    /*suspend*/ fun getAll(): List<Ingredients>
 //
 //    @Insert
-//    fun insertData(ingredients: Ingredients)
+//    /*fun*/ insertData(ingredients: Ingredients)
 //
 //    @Update
-//    fun updateData(ingredients: Ingredients)
+//    /*fun*/ updateData(ingredients: Ingredients)
 //
 //    @Delete
-//    fun deleteData(ingredients: Ingredients)
+//    /*fun*/ deleteData(ingredients: Ingredients)
 }
