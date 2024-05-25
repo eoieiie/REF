@@ -1,6 +1,6 @@
 package com.fsof.project.view.activity
 
-import android.app.DatePickerDialog
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
@@ -18,14 +18,14 @@ import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
-//import android.util.Log
 
+import android.app.DatePickerDialog
 import com.fsof.project.R
 import kotlin.math.exp
 
 class CameraActivity : AppCompatActivity() {
-
-    private val binding by lazy { ActivityCameraBinding.inflate(layoutInflater, null, false) }
+  
+    private val binding by lazy { ActivityCameraBinding.inflate(layoutInflater) } // private val binding by lazy { ActivityCameraBinding.inflate(layoutInflater, null, false) }
     private lateinit var classifier: Classifier
     private var imageUri: Uri? = null
     private val cameraResult =
@@ -45,12 +45,10 @@ class CameraActivity : AppCompatActivity() {
             }
             bitmap?.let {
                 val output = classifier.classify(bitmap)
-                val resultStr =
-                    String.format(Locale.ENGLISH, "%s", output.first)
-//                Log.d("prob", String.format(Locale.ENGLISH, "%.2f%%",output.second * 100))
+                val resultStr = String.format(Locale.ENGLISH, "%s", output.first)
                 binding.run {
-                    textResult.text = resultStr
-                    imagePhoto.setImageBitmap(bitmap)
+                    imageView.setImageBitmap(bitmap)
+                    editIngredientName.setText(resultStr)
                 }
             }
         }
@@ -64,6 +62,10 @@ class CameraActivity : AppCompatActivity() {
         setContentView(binding.root)
         initClassifier()
         binding.run {
+            btnSave.setOnClickListener {
+                saveDataAndReturn()
+            }
+            
             // camera launch
 //            btnTakePhoto.setOnClickListener {
                 getTmpFileUri().let { uri ->
@@ -97,8 +99,6 @@ class CameraActivity : AppCompatActivity() {
             editExpirationDate.setOnClickListener {
                 showDatePickerDialog()
             }
-
-
         }
     }
 
@@ -123,7 +123,7 @@ class CameraActivity : AppCompatActivity() {
         }
         return FileProvider.getUriForFile(applicationContext, "${BuildConfig.APPLICATION_ID}.provider", tmpFile)
     }
-
+    
     private fun showDatePickerDialog() {
         val calendar = Calendar.getInstance()
         val datePickerDialog = DatePickerDialog(
@@ -139,5 +139,14 @@ class CameraActivity : AppCompatActivity() {
             calendar.get(Calendar.DAY_OF_MONTH)
         )
         datePickerDialog.show()
+    }
+    
+    private fun saveDataAndReturn() {
+        // 필요한 데이터를 저장하는 로직을 추가..는나중에
+        Toast.makeText(this, "저장되었습니다", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+        finish()
     }
 }

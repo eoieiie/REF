@@ -1,11 +1,10 @@
-package com.fsof.project.view.fragment.list
-
+package com.fsof.project.view.fragment.list// com.fsof.project.view.fragment.list.ListFragment.kt
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.fsof.project.R
+import androidx.recyclerview.widget.GridLayoutManager
 import com.fsof.project.databinding.FragmentListBinding
 
 class ListFragment : Fragment() {
@@ -24,12 +23,14 @@ class ListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // RecyclerView 설정
+        val recyclerView = binding.recyclerView
+        recyclerView.layoutManager = GridLayoutManager(context, 2)
+
+        // 추가하기 버튼 클릭 시 동작
         binding.buttonAdd.setOnClickListener {
-            val listFragment2 = ListFragment2()
-            parentFragmentManager.beginTransaction()
-                .replace(R.id.main_frame, listFragment2)
-                .addToBackStack(null)
-                .commit()
+            // 추가하기 버튼 클릭 시 동작 구현
+            // 새로운 아이템을 리스트에 추가하는 코드를 여기에 작성
         }
     }
 

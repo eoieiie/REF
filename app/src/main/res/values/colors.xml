@@ -5,4 +5,11 @@
     <color name="blue">#1982FF</color>
     <color name="냉장">#8BD8FF</color>
     <color name="냉동">#6EB0FF</color>
+    
+    <color name="my_light_primary">#6EB0FF</color>
+    <color name="colorPrimaryDark">#005BB5</color>
+    <color name="colorAccent">#FF4081</color>
+    <color name="colorItemSelected">#FF000000</color> <!-- 선택된 아이템 색상 -->
+    <color name="colorItemUnselected">#757575</color> <!-- 선택되지 않은 아이템 색상 -->
+    <color name="bottom_nav_color">#95C2F9</color>
 </resources>
