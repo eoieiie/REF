@@ -1,11 +1,13 @@
 package com.fsof.project.view.activity
 
+import android.app.DatePickerDialog
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -15,10 +17,12 @@ import com.fsof.project.databinding.ActivityCameraBinding
 import com.fsof.project.utils.BuildConfig
 import java.io.File
 import java.io.IOException
+import java.text.SimpleDateFormat
 import java.util.*
 //import android.util.Log
 
 class CameraActivity : AppCompatActivity() {
+
     private val binding by lazy { ActivityCameraBinding.inflate(layoutInflater, null, false) }
     private lateinit var classifier: Classifier
     private var imageUri: Uri? = null
@@ -48,19 +52,28 @@ class CameraActivity : AppCompatActivity() {
                 }
             }
         }
+    private val dateFormat = SimpleDateFormat("yy-MM-dd", Locale.getDefault())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         initClassifier()
-//        binding.run {
+        binding.run {
+            // camera launch
 //            btnTakePhoto.setOnClickListener {
                 getTmpFileUri().let { uri ->
                     imageUri = uri
                     cameraResult.launch(uri)
                 }
 //            }
-//        }
+
+            // date picker
+            editRegistrationDate.text = dateFormat.format(Calendar.getInstance().time)
+            editExpirationDate.text = dateFormat.format(Calendar.getInstance().time)
+            editExpirationDate.setOnClickListener {
+                showDatePickerDialog()
+            }
+        }
     }
 
     override fun onDestroy() {
@@ -83,5 +96,22 @@ class CameraActivity : AppCompatActivity() {
             deleteOnExit()
         }
         return FileProvider.getUriForFile(applicationContext, "${BuildConfig.APPLICATION_ID}.provider", tmpFile)
+    }
+
+    private fun showDatePickerDialog() {
+        val calendar = Calendar.getInstance()
+        val datePickerDialog = DatePickerDialog(
+            this,
+            { _, selectedYear, selectedMonth, selectedDay ->
+                calendar.set(selectedYear, selectedMonth, selectedDay)
+                val selectedDate = dateFormat.format(calendar.time)
+                Log.d("calendar", selectedDate)
+                binding.editExpirationDate.text = selectedDate
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+        datePickerDialog.show()
     }
 }

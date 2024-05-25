@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,35 +8,135 @@
     android:background="@color/white"
     tools:context=".view.activity.CameraActivity">
 
+    <!-- 뒤로가기 버튼 -->
+    <Button
+        android:id="@+id/btnBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:layout_margin="16dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"/>
+
+    <!-- 이미지 추가 공간 -->
     <ImageView
         android:id="@+id/image_photo"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/photo_description" />
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:layout_below="@id/btnBack"/>
 
-<!--    <Button-->
-<!--        android:id="@+id/btn_take_photo"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:layout_marginTop="8dp"-->
-<!--        android:text="TAKE PHOTO"-->
-<!--        app:layout_constraintEnd_toEndOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/image_photo" />-->
+    <!-- 재료명 텍스트 라벨 -->
+    <TextView
+        android:id="@+id/textIngredientNameLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="재료명"
+        android:layout_below="@id/image_photo"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <!-- 재료명 입력 필드 -->
+    <EditText
+        android:id="@+id/editIngredientName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textIngredientNameLabel"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="재료명"
+        android:inputType="text"
+        android:background="@drawable/rounded_edittext"
+        android:padding="10dp"/>
+
+    <!-- 등록 날짜 텍스트 라벨 -->
+    <TextView
+        android:id="@+id/textRegistrationDateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="등록 날짜"
+        android:layout_below="@id/editIngredientName"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <!-- 등록 날짜 입력 필드 -->
+    <TextView
+        android:id="@+id/editRegistrationDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="yy-MM-dd"
+        android:layout_below="@id/textRegistrationDateLabel"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="등록 날짜"
+        android:inputType="date"
+        android:background="@drawable/rounded_edittext"
+        android:padding="10dp" />
+
+    <!-- 소비기한 텍스트 라벨 -->
+    <TextView
+        android:id="@+id/textExpirationDateLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="소비기한"
+        android:layout_below="@id/editRegistrationDate"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <!-- 소비기한 입력 필드 -->
+    <TextView
+        android:id="@+id/editExpirationDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="yy-MM-dd"
+        android:layout_below="@id/textExpirationDateLabel"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="등록 날짜"
+        android:inputType="date"
+        android:background="@drawable/rounded_edittext"
+        android:padding="10dp" />
+
+    <!-- 재고 텍스트 라벨 -->
+    <TextView
+        android:id="@+id/textStockLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="재고"
+        android:layout_below="@id/editExpirationDate"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="16dp"/>
+
+    <!-- 재고 입력 필드 -->
+    <EditText
+        android:id="@+id/editStock"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/textStockLabel"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:hint="재고"
+        android:inputType="number"
+        android:background="@drawable/rounded_edittext"
+        android:padding="10dp"/>
+
+    <!-- 저장 버튼 -->
+    <Button
+        android:id="@+id/btnSave"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="저장"
+        android:layout_margin="16dp"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"/>
 
     <TextView
         android:id="@+id/text_result"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/editStock"
+        android:layout_margin="16dp"
         android:textSize="20sp"
         android:textColor="@color/black"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         tools:text="none" />
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</RelativeLayout>
