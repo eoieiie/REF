@@ -1,23 +1,23 @@
-<?xml version="1.0" encoding="utf-8"?>
+<!-- fragment_list.xml -->
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- 추가하기 버튼 -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/buttonAdd" /> <!-- 추가하기 버튼 위에 배치 -->
+
     <Button
         android:id="@+id/buttonAdd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="추가하기"
+        android:textColor="@android:color/black"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"/>
 
-    <!-- 리스트뷰 -->
-    <ListView
-        android:id="@+id/listView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_below="@id/buttonAdd"
-        android:layout_marginTop="16dp"/>
+        android:layout_marginEnd="16dp" /> <!-- 오른쪽 상단에 배치 -->
+
 </RelativeLayout>

@@ -1,5 +1,6 @@
 package com.fsof.project.view.activity
 
+import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.ImageDecoder
 import android.net.Uri
@@ -16,10 +17,9 @@ import com.fsof.project.utils.BuildConfig
 import java.io.File
 import java.io.IOException
 import java.util.*
-//import android.util.Log
 
 class CameraActivity : AppCompatActivity() {
-    private val binding by lazy { ActivityCameraBinding.inflate(layoutInflater, null, false) }
+    private val binding by lazy { ActivityCameraBinding.inflate(layoutInflater) }
     private lateinit var classifier: Classifier
     private var imageUri: Uri? = null
     private val cameraResult =
@@ -39,12 +39,10 @@ class CameraActivity : AppCompatActivity() {
             }
             bitmap?.let {
                 val output = classifier.classify(bitmap)
-                val resultStr =
-                    String.format(Locale.ENGLISH, "%s", output.first)
-//                Log.d("prob", String.format(Locale.ENGLISH, "%.2f%%",output.second * 100))
+                val resultStr = String.format(Locale.ENGLISH, "%s", output.first)
                 binding.run {
-                    textResult.text = resultStr
-                    imagePhoto.setImageBitmap(bitmap)
+                    imageView.setImageBitmap(bitmap)
+                    editIngredientName.setText(resultStr)
                 }
             }
         }
@@ -53,14 +51,15 @@ class CameraActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         initClassifier()
-//        binding.run {
-//            btnTakePhoto.setOnClickListener {
-                getTmpFileUri().let { uri ->
-                    imageUri = uri
-                    cameraResult.launch(uri)
-                }
-//            }
-//        }
+        binding.run {
+            btnSave.setOnClickListener {
+                saveDataAndReturn()
+            }
+        }
+        getTmpFileUri().let { uri ->
+            imageUri = uri
+            cameraResult.launch(uri)
+        }
     }
 
     override fun onDestroy() {
@@ -83,5 +82,14 @@ class CameraActivity : AppCompatActivity() {
             deleteOnExit()
         }
         return FileProvider.getUriForFile(applicationContext, "${BuildConfig.APPLICATION_ID}.provider", tmpFile)
+    }
+
+    private fun saveDataAndReturn() {
+        // 필요한 데이터를 저장하는 로직을 추가..는나중에
+        Toast.makeText(this, "저장되었습니다", Toast.LENGTH_SHORT).show()
+        val intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+        finish()
     }
 }
