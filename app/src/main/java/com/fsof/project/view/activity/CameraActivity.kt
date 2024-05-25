@@ -16,10 +16,16 @@ import com.fsof.project.databinding.ActivityCameraBinding
 import com.fsof.project.utils.BuildConfig
 import java.io.File
 import java.io.IOException
+import java.text.SimpleDateFormat
 import java.util.*
 
+import android.app.DatePickerDialog
+import com.fsof.project.R
+import kotlin.math.exp
+
 class CameraActivity : AppCompatActivity() {
-    private val binding by lazy { ActivityCameraBinding.inflate(layoutInflater) }
+  
+    private val binding by lazy { ActivityCameraBinding.inflate(layoutInflater) } // private val binding by lazy { ActivityCameraBinding.inflate(layoutInflater, null, false) }
     private lateinit var classifier: Classifier
     private var imageUri: Uri? = null
     private val cameraResult =
@@ -46,6 +52,10 @@ class CameraActivity : AppCompatActivity() {
                 }
             }
         }
+    private val dateFormat = SimpleDateFormat("yy-MM-dd", Locale.getDefault())
+    private var isFreezed: Boolean = false
+    private var up: String = dateFormat.format(Calendar.getInstance().time)
+    private var expiration: String = dateFormat.format(Calendar.getInstance().time)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -55,10 +65,40 @@ class CameraActivity : AppCompatActivity() {
             btnSave.setOnClickListener {
                 saveDataAndReturn()
             }
-        }
-        getTmpFileUri().let { uri ->
-            imageUri = uri
-            cameraResult.launch(uri)
+            
+            // camera launch
+//            btnTakePhoto.setOnClickListener {
+                getTmpFileUri().let { uri ->
+                    imageUri = uri
+                    cameraResult.launch(uri)
+                }
+//            }
+
+            // name
+
+            // Weight
+
+            // isFreezed
+            radioGroup.setOnCheckedChangeListener { radioGroup, radioButtonID ->
+                when (radioButtonID) {
+                    R.id.rightRadioButton -> {
+                        isFreezed = true
+                    }
+                    R.id.rightRadioButton -> {
+                        isFreezed = false
+                    }
+                }
+//                Log.d("Radio", "$isFreezed")
+            }
+
+            // up
+            editRegistrationDate.text = up
+
+            // expiration
+            editExpirationDate.text = expiration
+            editExpirationDate.setOnClickListener {
+                showDatePickerDialog()
+            }
         }
     }
 
@@ -83,7 +123,24 @@ class CameraActivity : AppCompatActivity() {
         }
         return FileProvider.getUriForFile(applicationContext, "${BuildConfig.APPLICATION_ID}.provider", tmpFile)
     }
-
+    
+    private fun showDatePickerDialog() {
+        val calendar = Calendar.getInstance()
+        val datePickerDialog = DatePickerDialog(
+            this,
+            { _, selectedYear, selectedMonth, selectedDay ->
+                calendar.set(selectedYear, selectedMonth, selectedDay)
+//                Log.d("calendar", dateFormat.format(calendar.time))
+                binding.editExpirationDate.text = dateFormat.format(calendar.time)
+                expiration = dateFormat.format(calendar.time)
+            },
+            calendar.get(Calendar.YEAR),
+            calendar.get(Calendar.MONTH),
+            calendar.get(Calendar.DAY_OF_MONTH)
+        )
+        datePickerDialog.show()
+    }
+    
     private fun saveDataAndReturn() {
         // 필요한 데이터를 저장하는 로직을 추가..는나중에
         Toast.makeText(this, "저장되었습니다", Toast.LENGTH_SHORT).show()
