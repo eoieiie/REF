@@ -22,7 +22,7 @@ import android.app.DatePickerDialog
 import android.util.Log
 
 import com.fsof.project.R
-import com.fsof.project.model.Nutrient.Nutrients
+import com.fsof.project.model.nutrients.Nutrients
 import com.fsof.project.model.entity.Ingredients
 import com.fsof.project.model.room.IngredientsDatabase
 
@@ -145,10 +145,18 @@ class CameraActivity : AppCompatActivity() {
     }
     
     private fun saveDataAndReturn() {
+        Toast.makeText(this, "저장되었습니다", Toast.LENGTH_SHORT).show() // testDB()
+        val intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+        finish()
+    }
 
+    private fun testDB() {
         val ingredientsDB = IngredientsDatabase.getInstance(this)
 
-        if (ingredientsDB != null) {
+//        if (ingredientsDB != null) {
+
             // 유저 추가
             val apple = Ingredients(name = "사과", weight = "두봉지", isFreezed = false, upDate = "24-05-30", expirationDate = "24-06-30", nutrients = Nutrients(calories = 20, carbohydrates = 20, protein = 20, fat = 20))
             ingredientsDB.ingredientsDao().insertData(apple)
@@ -158,20 +166,17 @@ class CameraActivity : AppCompatActivity() {
 
             // 유저 출력
             val ingredientsList = ingredientsDB.ingredientsDao().selectAll()
-            Log.d("DB", "List: $ingredientsList")
+            Log.d("DataBase", "ADD: $ingredientsList")
 
             // 유저 삭제
             ingredientsDB.ingredientsDao().deleteData(apple)
+            val ingredientsLists = ingredientsDB.ingredientsDao().selectAll()
+            Log.d("DataBase", "Delete: $ingredientsLists")
 
 //            // 유저 선택
 //            val user2 = roomDb.userDao().selectByUserId(2)
 //            Log.d("DB", "User List: $user2")
-        }
 
-        Toast.makeText(this, "저장되었습니다", Toast.LENGTH_SHORT).show()
-        val intent = Intent(this, MainActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
-        finish()
+//        }
     }
 }

@@ -1,6 +1,6 @@
 package com.fsof.project.controller
 
-import com.fsof.project.model.Nutrient.Ingredient
+import com.fsof.project.model.nutrients.Ingredient
 import com.fsof.project.model.recipes.Recipe
 import com.fsof.project.controller.service.RecipeService
 import retrofit2.Call

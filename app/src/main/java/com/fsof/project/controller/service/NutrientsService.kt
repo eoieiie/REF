@@ -5,7 +5,7 @@ import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
 import com.fsof.project.model.input.Input
-import com.fsof.project.model.Nutrient.Ingredient
+import com.fsof.project.model.nutrients.Ingredient
 
 interface NutrientsService {
     @POST(APIs.NUTRIENTS)
