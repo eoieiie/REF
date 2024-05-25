@@ -9,5 +9,5 @@ import com.fsof.project.model.nutrients.Ingredient
 
 interface NutrientsService {
     @POST(APIs.NUTRIENTS)
-    /*suspend*/ fun createNutrients(@Body items: Input): Call<Ingredient>
+    /*suspend*/ fun createNutrients(@Body item: Input): Call<Ingredient>
 }

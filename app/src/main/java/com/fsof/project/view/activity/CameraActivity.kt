@@ -22,8 +22,11 @@ import android.app.DatePickerDialog
 import android.util.Log
 
 import com.fsof.project.R
+import com.fsof.project.controller.NutrientController
+import com.fsof.project.controller.client.NutrientClient
 import com.fsof.project.model.nutrients.Nutrients
 import com.fsof.project.model.entity.Ingredients
+import com.fsof.project.model.input.Input
 import com.fsof.project.model.room.IngredientsDatabase
 
 class CameraActivity : AppCompatActivity() {
@@ -51,14 +54,20 @@ class CameraActivity : AppCompatActivity() {
                 val resultStr = String.format(Locale.ENGLISH, "%s", output.first)
                 binding.run {
                     imageView.setImageBitmap(bitmap)
+                    name = resultStr
                     editIngredientName.setText(resultStr)
                 }
             }
         }
     private val dateFormat = SimpleDateFormat("yy-MM-dd", Locale.getDefault())
+
+    private var name: String = "달걀"
+    private var weight: String = "200g"
     private var isFreezed: Boolean = false
     private var up: String = dateFormat.format(Calendar.getInstance().time)
     private var expiration: String = dateFormat.format(Calendar.getInstance().time)
+
+    private lateinit var nutrientController: NutrientController
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +77,7 @@ class CameraActivity : AppCompatActivity() {
             btnSave.setOnClickListener {
                 saveDataAndReturn()
             }
-            
+
             // camera launch
 //            btnTakePhoto.setOnClickListener {
                 getTmpFileUri().let { uri ->
@@ -82,7 +91,7 @@ class CameraActivity : AppCompatActivity() {
             // Weight
 
             // isFreezed
-            radioGroup.setOnCheckedChangeListener { radioGroup, radioButtonID ->
+            radioGroup.setOnCheckedChangeListener { _, radioButtonID ->
                 when (radioButtonID) {
                     R.id.rightRadioButton -> {
                         isFreezed = true
@@ -102,6 +111,8 @@ class CameraActivity : AppCompatActivity() {
             editExpirationDate.setOnClickListener {
                 showDatePickerDialog()
             }
+
+            nutrientController = NutrientController(NutrientClient.nutrientService)
         }
     }
 
@@ -146,10 +157,31 @@ class CameraActivity : AppCompatActivity() {
     
     private fun saveDataAndReturn() {
         Toast.makeText(this, "저장되었습니다", Toast.LENGTH_SHORT).show() // testDB()
+
+        //dummy
+        val input = Input(name = name, weight = weight, isFreezed = false, up = up, expiration = expiration)
+        Log.d("API", "$input")
+        createNutrients(input)
+
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
         finish()
+    }
+
+    private fun createNutrients(input: Input) {
+        nutrientController.createNutrients(input) { nutrients, throwable ->
+            runOnUiThread {
+                if (throwable != null) {
+                    Toast.makeText(this, "Error: ${throwable.message}", Toast.LENGTH_SHORT).show()
+                } else if (nutrients != null) {
+                    Toast.makeText(this, "nutrients: ${nutrients.name}", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(this, "Unknown error occurred", Toast.LENGTH_SHORT).show()
+                }
+            }
+            Log.d("API", "$nutrients")
+        }
     }
 
     private fun testDB() {
@@ -158,7 +190,7 @@ class CameraActivity : AppCompatActivity() {
 //        if (ingredientsDB != null) {
 
             // 유저 추가
-            val apple = Ingredients(name = "사과", weight = "두봉지", isFreezed = false, upDate = "24-05-30", expirationDate = "24-06-30", nutrients = Nutrients(calories = 20, carbohydrates = 20, protein = 20, fat = 20))
+            val apple = Ingredients(name = "사과", weight = "두봉지", isFreezed = false, upDate = "24-05-30", expirationDate = "24-06-30", nutrients = Nutrients(calories = 20, carbohydrates = 2.0, protein = 2.0, fat = 2.0))
             ingredientsDB.ingredientsDao().insertData(apple)
 
 //            // 유저 수정
