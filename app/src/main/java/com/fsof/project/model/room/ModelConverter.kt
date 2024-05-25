@@ -1,12 +1,12 @@
 package com.fsof.project.model.room
 
 import androidx.room.TypeConverter
-import com.fsof.project.model.entity.Ingredients
-import com.fsof.project.model.entity.Recipes
-import com.fsof.project.model.nutrients.Nutrients
-import com.fsof.project.model.recipes.Meal
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.fsof.project.model.nutrients.Nutrients
+import com.fsof.project.model.recipes.Meal
+//import com.fsof.project.model.entity.Ingredients
+//import com.fsof.project.model.entity.Recipes
 
 class ModelConverter {
     // Ingredients
