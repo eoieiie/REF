@@ -2,18 +2,18 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/fragment_camera"
-        android:title="1"
-        android:icon="@drawable/camera_icon"/>
+        android:title="Camera"
+        android:icon="@drawable/vectorcamera"/>
     <item
         android:id="@+id/fragment_list"
-        android:title="2"
-        android:icon="@drawable/refr_icon"/>
+        android:title="Home"
+        android:icon="@drawable/vectorref"/>
     <item
         android:id="@+id/fragment_recommend"
-        android:title="3"
-        android:icon="@drawable/ai_icon"/>
+        android:title="Recipe"
+        android:icon="@drawable/vectorrecom"/>
     <item
         android:id="@+id/fragment_mypage"
-        android:title="4"
-        android:icon="@drawable/acc_icon"/>
+        android:title="My page"
+        android:icon="@drawable/iconmp"/>
 </menu>

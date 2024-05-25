@@ -12,7 +12,8 @@
         android:id="@+id/btnBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back"
+        android:text="Back icon"
+        android:textColor="@color/black"
         android:layout_margin="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -23,6 +24,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="저장"
+        android:textColor="@color/black"
         android:layout_margin="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
@@ -67,6 +69,36 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
+    <!-- 보관 방법 라디오 그룹 -->
+    <LinearLayout
+        android:id="@+id/segmentedButtonContainer"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@id/editIngredientName"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp">
+
+        <!-- 냉장 -->
+        <Button
+            android:id="@+id/buttonRefrigerate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="냉장"
+            android:textColor="@color/black" />
+
+        <!-- 냉동 -->
+        <Button
+            android:id="@+id/buttonFreeze"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="냉동"
+            android:textColor="@color/black" />
+    </LinearLayout>
+
     <!-- 등록 날짜 텍스트 라벨 -->
     <TextView
         android:id="@+id/textRegistrationDateLabel"
@@ -75,7 +107,7 @@
         android:text="등록 날짜"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
-        app:layout_constraintTop_toBottomOf="@id/editIngredientName"
+        app:layout_constraintTop_toBottomOf="@+id/segmentedButtonContainer"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <!-- 등록 날짜 입력 필드 -->
@@ -132,17 +164,6 @@
         app:layout_constraintTop_toBottomOf="@id/editExpirationDate"
         app:layout_constraintStart_toStartOf="parent"/>
 
-    <!-- 보관 방법 선택 스피너 -->
-    <Spinner
-        android:id="@+id/spinnerStorageMethod"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginEnd="16dp"
-        app:layout_constraintTop_toBottomOf="@id/textStorageMethodLabel"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
     <!-- 재고/수량 텍스트 라벨 -->
     <TextView
         android:id="@+id/textStockLabel"
@@ -151,7 +172,7 @@
         android:text="재고/수량"
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"
-        app:layout_constraintTop_toBottomOf="@id/spinnerStorageMethod"
+        app:layout_constraintTop_toBottomOf="@+id/textStorageMethodLabel"
         app:layout_constraintStart_toStartOf="parent"/>
 
     <!-- 재고/수량 입력 필드 -->
