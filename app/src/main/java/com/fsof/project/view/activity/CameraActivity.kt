@@ -18,10 +18,9 @@ import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
-
 import android.app.DatePickerDialog
+
 import com.fsof.project.R
-import kotlin.math.exp
 
 class CameraActivity : AppCompatActivity() {
   
