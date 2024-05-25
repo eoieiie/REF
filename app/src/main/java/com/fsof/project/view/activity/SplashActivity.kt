@@ -2,10 +2,8 @@ package com.fsof.project.view.activity
 
 import android.content.Intent
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+
 import com.fsof.project.R
 import java.util.logging.Handler
 
