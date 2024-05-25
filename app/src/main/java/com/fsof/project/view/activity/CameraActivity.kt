@@ -27,7 +27,7 @@ import com.fsof.project.controller.NutrientController
 import com.fsof.project.controller.client.NutrientClient
 import com.fsof.project.model.entity.Ingredients
 import com.fsof.project.model.input.Input
-import com.fsof.project.model.room.IngredientsDatabase
+import com.fsof.project.model.room.IngredientDatabase
 
 class CameraActivity : AppCompatActivity() {
   
@@ -69,7 +69,8 @@ class CameraActivity : AppCompatActivity() {
     private var expiration: String = dateFormat.format(Calendar.getInstance().time)
 
     private lateinit var nutrientController: NutrientController
-    private lateinit var ingredientsDB: IngredientsDatabase
+
+    private lateinit var ingredientsDB: IngredientDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -184,7 +185,7 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun insertData(ingredient: Ingredients) {
-        ingredientsDB = IngredientsDatabase.getInstance(this)
+        ingredientsDB = IngredientDatabase.getInstance(this)
         try {
             // if (ingredientsDB != null)
             ingredientsDB.ingredientsDao().insertData(ingredient)
