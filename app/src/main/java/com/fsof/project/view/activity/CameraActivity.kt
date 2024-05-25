@@ -19,8 +19,12 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import android.app.DatePickerDialog
+import android.util.Log
 
 import com.fsof.project.R
+import com.fsof.project.model.nutrients.Nutrients
+import com.fsof.project.model.entity.Ingredients
+import com.fsof.project.model.room.IngredientsDatabase
 
 class CameraActivity : AppCompatActivity() {
   
@@ -141,11 +145,38 @@ class CameraActivity : AppCompatActivity() {
     }
     
     private fun saveDataAndReturn() {
-        // 필요한 데이터를 저장하는 로직을 추가..는나중에
-        Toast.makeText(this, "저장되었습니다", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "저장되었습니다", Toast.LENGTH_SHORT).show() // testDB()
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
         finish()
+    }
+
+    private fun testDB() {
+        val ingredientsDB = IngredientsDatabase.getInstance(this)
+
+//        if (ingredientsDB != null) {
+
+            // 유저 추가
+            val apple = Ingredients(name = "사과", weight = "두봉지", isFreezed = false, upDate = "24-05-30", expirationDate = "24-06-30", nutrients = Nutrients(calories = 20, carbohydrates = 20, protein = 20, fat = 20))
+            ingredientsDB.ingredientsDao().insertData(apple)
+
+//            // 유저 수정
+//            ingredientsDB.userDao().updateNameByUserId(1, "드즈")
+
+            // 유저 출력
+            val ingredientsList = ingredientsDB.ingredientsDao().selectAll()
+            Log.d("DataBase", "ADD: $ingredientsList")
+
+            // 유저 삭제
+            ingredientsDB.ingredientsDao().deleteData(apple)
+            val ingredientsLists = ingredientsDB.ingredientsDao().selectAll()
+            Log.d("DataBase", "Delete: $ingredientsLists")
+
+//            // 유저 선택
+//            val user2 = roomDb.userDao().selectByUserId(2)
+//            Log.d("DB", "User List: $user2")
+
+//        }
     }
 }
