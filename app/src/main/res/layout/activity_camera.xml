@@ -8,27 +8,27 @@
     android:background="@color/white"
     tools:context=".view.activity.CameraActivity">
 
-    <!-- 뒤로가기 버튼 -->
-    <Button
-        android:id="@+id/btnBack"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Back icon"
-        android:textColor="@color/black"
-        android:layout_margin="16dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentTop="true"/>
+<!--    &lt;!&ndash; 뒤로가기 버튼 &ndash;&gt;-->
+<!--    <Button-->
+<!--        android:id="@+id/btnBack"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="Back icon"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:layout_margin="16dp"-->
+<!--        android:layout_alignParentStart="true"-->
+<!--        android:layout_alignParentTop="true"/>-->
 
-    <!-- 저장 버튼 -->
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="저장"
-        android:textColor="@color/black"
-        android:layout_margin="16dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"/>
+<!--    &lt;!&ndash; 저장 버튼 &ndash;&gt;-->
+<!--    <Button-->
+<!--        android:id="@+id/btnSave"-->
+<!--        android:layout_width="wrap_content"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:text="저장"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:layout_margin="16dp"-->
+<!--        android:layout_alignParentEnd="true"-->
+<!--        android:layout_alignParentTop="true"/>-->
 
     <!-- 이미지 추가 공간 -->
     <ImageView
@@ -36,6 +36,7 @@
         android:layout_width="match_parent"
         android:layout_height="300dp"
         android:scaleType="fitCenter"
+        android:layout_marginHorizontal="16dp"
         android:layout_below="@id/btnBack"/>
 
     <!-- 재료명 텍스트 라벨 -->
