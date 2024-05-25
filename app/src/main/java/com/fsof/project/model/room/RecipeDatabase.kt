@@ -4,9 +4,11 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
-import com.fsof.project.model.recipes.Recipe
+import androidx.room.TypeConverters
+import com.fsof.project.model.entity.Recipes
 
-@Database(entities = [Recipe::class], version = 1, exportSchema = false)
+@Database(entities = [Recipes::class], version = 1, exportSchema = false)
+@TypeConverters(ModelConverter::class)
 abstract class RecipeDatabase: RoomDatabase(){
 
     abstract fun recipeDao(): RecipeDao

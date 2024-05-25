@@ -3,7 +3,7 @@ package com.fsof.project.model.entity
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.fsof.project.model.Nutrient.Nutrients
+import com.fsof.project.model.nutrients.Nutrients
 //import com.google.gson.annotations.SerializedName
 
 @Entity(tableName = "Ingredients")

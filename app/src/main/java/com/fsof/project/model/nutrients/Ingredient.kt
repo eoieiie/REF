@@ -1,4 +1,4 @@
-package com.fsof.project.model.Nutrient
+package com.fsof.project.model.nutrients
 
 import com.google.gson.annotations.SerializedName
 
