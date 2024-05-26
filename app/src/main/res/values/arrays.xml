@@ -1,8 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="unit_array">
-        <item>kg</item>
         <item>g</item>
-        <item>mg</item>
+        <item>kg</item>
+        <item>ml</item>
+        <item>l</item>
+        <item>개</item>
+        <item>근</item>
+        <item>그릇</item>
+        <item>컵</item>
+        <item>병</item>
+        <item>마리</item>
     </string-array>
 </resources>

@@ -1,11 +1,12 @@
-package com.fsof.project.view.fragment.list// com.fsof.project.view.fragment.list.ListFragment.kt
+package com.fsof.project.view.fragment.list
+
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.recyclerview.widget.GridLayoutManager
 import com.fsof.project.databinding.FragmentListBinding
+import androidx.recyclerview.widget.GridLayoutManager
 
 class ListFragment : Fragment() {
 

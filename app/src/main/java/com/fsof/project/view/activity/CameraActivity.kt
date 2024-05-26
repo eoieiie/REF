@@ -63,7 +63,7 @@ class CameraActivity : AppCompatActivity() {
     private val dateFormat = SimpleDateFormat("yy-MM-dd", Locale.getDefault())
 
     var name: String = ""
-    private var weight: String = "1개"
+    private var weight: String = ""
     private var isFreezed: Boolean = false
     private var up: String = dateFormat.format(Calendar.getInstance().time)
     private var expiration: String = dateFormat.format(Calendar.getInstance().time)
@@ -88,8 +88,6 @@ class CameraActivity : AppCompatActivity() {
                     cameraResult.launch(uri)
                 }
 //            }
-
-            // Weight
 
             // isFreezed
             radioGroup.setOnCheckedChangeListener { _, radioButtonID ->
@@ -138,6 +136,14 @@ class CameraActivity : AppCompatActivity() {
         }
         return FileProvider.getUriForFile(applicationContext, "${BuildConfig.APPLICATION_ID}.provider", tmpFile)
     }
+
+//    private fun returnWeight() {
+//        if ((binding.editStock.text).isNotEmpty()) {
+//            val combinedValue = "${binding.editStock.text}${binding.spinnerUnit.selectedItem}"
+//        } else {
+//            Toast.makeText(this, "재고를 입력하세요", Toast.LENGTH_SHORT).show()
+//        }
+//    }
     
     private fun showDatePickerDialog() {
         val calendar = Calendar.getInstance()
@@ -157,15 +163,19 @@ class CameraActivity : AppCompatActivity() {
     }
     
     private fun saveDataAndReturn() {
+        // name
+        name = binding.editIngredientName.text.toString()
+        // weight
+        weight = "${binding.editStock.text}${binding.spinnerUnit.selectedItem}"
+
         Log.d("API", "${Input(name = name, weight = weight, isFreezed = false, up_date = up, expiration_date = expiration)}")
 
         // API Networking & Data Storing
-        createNutrients(Input(name = name, weight = weight, isFreezed = false, up_date = up, expiration_date = expiration))
-
-        val intent = Intent(this, MainActivity::class.java)
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
-        finish()
+        if (binding.editStock.text.toString() != "") {
+            createNutrients(Input(name = name, weight = weight, isFreezed = false, up_date = up, expiration_date = expiration))
+        } else {
+            Toast.makeText(this, "재고를 입력해주세요.", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun createNutrients(input: Input) {
@@ -173,12 +183,12 @@ class CameraActivity : AppCompatActivity() {
             runOnUiThread {
                 if (throwable != null) {
                     Log.d("API", "Error: ${throwable.message}")
-                    Toast.makeText(this, "Error: ${throwable.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "영양소 생성 실패 ㅠㅠ", Toast.LENGTH_SHORT).show()
                 } else if (nutrients != null) {
                     insertData(nutrients)
                 } else {
                     Log.d("API", "Unknown error occurred")
-                    Toast.makeText(this, "Unknown error occurred", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "영양소 생성 실패 ㅠㅠ", Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -192,9 +202,20 @@ class CameraActivity : AppCompatActivity() {
             Log.d("DB", "저장 완료")
             Log.d("DB", "Ingredients List: ${ingredientsDB.ingredientsDao().selectAll()}")
             Toast.makeText(this, "${ingredient.name} 추가 성공!.", Toast.LENGTH_SHORT).show()
+            goToMainView()
         } catch (e: SQLiteConstraintException) {
-            Toast.makeText(this, "중복된 식품을 등록하였습니다. 다른 식품으로 다시 등록해주세요.", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "냉장고 등록 실패 ㅠㅠ", Toast.LENGTH_SHORT).show()
             Log.e("DB", "UNIQUE constraint failed: ${e.message}")
+        } catch (e: Exception) {
+            Toast.makeText(this, "냉장고 등록 실패 ㅠㅠ", Toast.LENGTH_SHORT).show()
+            Log.e("DB_ERROR", "Exception: ${e.message}")
         }
+    }
+
+    private fun goToMainView() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+        finish()
     }
 }
