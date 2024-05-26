@@ -6,9 +6,12 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.fsof.project.R
+import com.fsof.project.model.entity.Ingredients
 
-class MyAdapter(private val dataList: List<ItemData>) :
+class MyAdapter(private val dataList: List<Ingredients>) :
     RecyclerView.Adapter<MyAdapter.ViewHolder>() {
+
+    private val displayInfoList = mutableSetOf<Int>()
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val textView: TextView = view.findViewById(R.id.textView)
@@ -22,10 +25,18 @@ class MyAdapter(private val dataList: List<ItemData>) :
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = dataList[position]
-        holder.textView.text = if (item.isInfo) "Info ${position + 1}" else item.content
+        holder.textView.text = if (displayInfoList.contains(position)) {
+            "Calories: ${item.nutrients.calories}, Carbs: ${item.nutrients.carbohydrates}, Protein: ${item.nutrients.protein}, Fat: ${item.nutrients.fat}"
+        } else {
+            item.name
+        }
 
         holder.itemView.setOnClickListener {
-            item.isInfo = !item.isInfo
+            if (displayInfoList.contains(position)) {
+                displayInfoList.remove(position)
+            } else {
+                displayInfoList.add(position)
+            }
             notifyItemChanged(position)
         }
     }
