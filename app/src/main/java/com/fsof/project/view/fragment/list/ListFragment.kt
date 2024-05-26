@@ -1,6 +1,5 @@
 package com.fsof.project.view.fragment.list
 
-import MyAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.fsof.project.R
 import com.fsof.project.databinding.FragmentListBinding
 
 class ListFragment : Fragment() {
@@ -37,11 +35,10 @@ class ListFragment : Fragment() {
         recyclerView.adapter = adapter
     }
 
-    private fun generateTestData(): List<String> {
-        // 테스트 데이터 생성 (예: 20개의 아이템)
-        val testData = mutableListOf<String>()
+    private fun generateTestData(): List<ItemData> {
+        val testData = mutableListOf<ItemData>()
         for (i in 1..20) {
-            testData.add("Item $i")
+            testData.add(ItemData(content = "Item $i"))
         }
         return testData
     }
