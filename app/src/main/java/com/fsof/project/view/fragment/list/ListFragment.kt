@@ -7,7 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.fsof.project.R
 import com.fsof.project.databinding.FragmentListBinding
+import com.fsof.project.model.entity.Ingredients
+import com.fsof.project.model.nutrients.Nutrients
+import com.fsof.project.model.room.IngredientDatabase
 
 import com.fsof.project.model.room.IngredientDatabase
 import com.fsof.project.model.room.IngredientsDao
@@ -20,22 +24,16 @@ class ListFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var recyclerView: RecyclerView
+    private lateinit var adapter: MyAdapter
 
     private lateinit var ingredientsDB: IngredientDatabase
-
-    val dummyData= listOf(
-        Ingredients("달걀", "1개", false, "24-05-25", "24-05-25", Nutrients(70, 0.6, 6.3, 4.8)),
-        Ingredients("닭고기", "1개", false, "24-05-25", "24-05-25", Nutrients(215, 0.0, 43.0, 4.5)),
-        Ingredients("대파", "", false, "24-05-26", "24-05-26", Nutrients(64, 15.0, 2.0, 0.0)),
-        Ingredients("당근", "3개", false, "24-05-26", "24-05-26", Nutrients(105, 24.0, 2.0, 0.5)),
-        Ingredients("새우", "1마리", false, "24-05-26", "24-05-26", Nutrients(7, 0.1, 1.5, 0.1))
-    ) // ingredientsDB.ingredientsDao().selectAll()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentListBinding.inflate(inflater, container, false)
+        db = IngredientDatabase.getInstance(requireContext())
         return binding.root
     }
 
@@ -44,19 +42,32 @@ class ListFragment : Fragment() {
 
         recyclerView = binding.recyclerView
         recyclerView.layoutManager = GridLayoutManager(context, 2)
+        
+        // ingredientsDB.ingredientsDao().selectAll()
+        // 데이터 생성 및 삽입
+        val testData = generateTestData()
+        insertDataToDatabase(testData)
 
-        val testData = generateTestData() // 테스트 데이터 생성
-        val adapter = MyAdapter(testData) // Adapter 생성
-
+        // 데이터베이스에서 데이터 가져오기
+        val ingredientList = db.ingredientsDao().selectAll()
+        adapter = MyAdapter(ingredientList)
         recyclerView.adapter = adapter
     }
 
-    private fun generateTestData(): List<ItemData> {
-        val testData = mutableListOf<ItemData>()
-        for (i in 1..20) {
-            testData.add(ItemData(content = "Item $i"))
+    private fun generateTestData(): List<Ingredients> {
+        return listOf(
+            Ingredients(name = "달걀", weight = "1개", isFreezed = false, up_date = "24-05-25", expiration_date = "24-05-25", nutrients = Nutrients(calories = 70, carbohydrates = 0.6, protein = 6.3, fat = 4.8)),
+            Ingredients(name = "닭고기", weight = "1개", isFreezed = false, up_date = "24-05-25", expiration_date = "24-05-25", nutrients = Nutrients(calories = 215, carbohydrates = 0.0, protein = 43.0, fat = 4.5)),
+            Ingredients(name = "대파", weight = "", isFreezed = false, up_date = "24-05-26", expiration_date = "24-05-26", nutrients = Nutrients(calories = 64, carbohydrates = 15.0, protein = 2.0, fat = 0.0)),
+            Ingredients(name = "당근", weight = "3개", isFreezed = false, up_date = "24-05-26", expiration_date = "24-05-26", nutrients = Nutrients(calories = 105, carbohydrates = 24.0, protein = 2.0, fat = 0.5)),
+            Ingredients(name = "새우", weight = "1마리", isFreezed = false, up_date = "24-05-26", expiration_date = "24-05-26", nutrients = Nutrients(calories = 7, carbohydrates = 0.1, protein = 1.5, fat = 0.1))
+        )
+    }
+
+    private fun insertDataToDatabase(data: List<Ingredients>) {
+        for (ingredient in data) {
+            ingredientsDB.ingredientsDao().insertData(ingredient)
         }
-        return testData
     }
 
     override fun onDestroyView() {
