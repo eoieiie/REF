@@ -9,9 +9,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fsof.project.databinding.FragmentListBinding
 
-import MyAdapter
-import androidx.recyclerview.widget.GridLayoutManager
-
 class ListFragment : Fragment() {
 
     private var _binding: FragmentListBinding? = null
