@@ -6,9 +6,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.fsof.project.view.fragment.list.ListFragment
 import com.fsof.project.view.fragment.mypage.MypageFragment
-import com.fsof.project.R
 import com.fsof.project.view.fragment.recommend.RecommendFragment
 import com.fsof.project.databinding.ActivityMainBinding
+
+import com.fsof.project.R
 
 class MainActivity : AppCompatActivity() {
 

@@ -1,5 +1,6 @@
 <!-- res/color/bottom_nav_color.xml -->
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<selector
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <!-- 선택된 상태일 때의 색상 -->
     <item android:color="#318CF9" android:state_checked="true"/>
     <!-- 선택되지 않은 상태일 때의 색상 -->

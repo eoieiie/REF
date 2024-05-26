@@ -22,7 +22,8 @@
             android:layout_marginEnd="8dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:scaleType="fitCenter"/>
+            android:scaleType="fitCenter"
+            android:contentDescription="저장 버튼" />
 
         <!-- 가운데 텍스트 -->
         <TextView
@@ -37,7 +38,6 @@
             android:layout_centerInParent="true"/>
 
     </RelativeLayout>
-    <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"

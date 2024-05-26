@@ -20,6 +20,4 @@
         android:layout_below="@id/createRecipeBtn"
         android:text="recipeText here"
         android:textColor="@android:color/black"/>
-
-
 </RelativeLayout>

@@ -63,8 +63,8 @@ class RecommendFragment : Fragment() {
                 if (throwable != null) {
                     Log.d("API", "Error: ${throwable.message}")
                 } else if (recipes != null) {
-                    Log.d("API", "Recipes: ${recipes}")
-                    binding.recipeText.setText("$recipes") // binding.recipeText.text = "${recipes}"
+                    Log.d("API", "Recipes: $recipes")
+                    binding.recipeText.text = recipes.toString() // binding.recipeText.setText(recipes.toString())
                 } else {
                     Log.d("API", "Unknown error occurred")
                 }
