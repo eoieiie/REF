@@ -37,16 +37,15 @@ class ListFragment : Fragment() {
 
         recyclerView = binding.recyclerView
         recyclerView.layoutManager = GridLayoutManager(context, 2)
-        
-        // ingredientsDB.ingredientsDao().selectAll()
-        // 데이터 생성 및 삽입
-        val testData = generateTestData()
-        insertDataToDatabase(testData)
 
-        // 데이터베이스에서 데이터 가져오기
         val ingredientList = ingredientsDatabase.ingredientsDao().selectAll()
         adapter = MyAdapter(ingredientList)
         recyclerView.adapter = adapter
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 
     private fun generateTestData(): List<Ingredients> {
@@ -57,16 +56,5 @@ class ListFragment : Fragment() {
             Ingredients(name = "당근", weight = "3개", isFreezed = false, up_date = "24-05-26", expiration_date = "24-05-26", nutrients = Nutrients(calories = 105, carbohydrates = 24.0, protein = 2.0, fat = 0.5)),
             Ingredients(name = "새우", weight = "1마리", isFreezed = false, up_date = "24-05-26", expiration_date = "24-05-26", nutrients = Nutrients(calories = 7, carbohydrates = 0.1, protein = 1.5, fat = 0.1))
         )
-    }
-
-    private fun insertDataToDatabase(data: List<Ingredients>) {
-        for (ingredient in data) {
-            ingredientsDatabase.ingredientsDao().insertData(ingredient)
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 }
