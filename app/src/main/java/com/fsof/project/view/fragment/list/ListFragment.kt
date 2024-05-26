@@ -9,12 +9,27 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fsof.project.databinding.FragmentListBinding
 
+import com.fsof.project.model.room.IngredientDatabase
+import com.fsof.project.model.room.IngredientsDao
+import com.fsof.project.model.entity.Ingredients
+import com.fsof.project.model.nutrients.Nutrients
+
 class ListFragment : Fragment() {
 
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var recyclerView: RecyclerView
+
+    private lateinit var ingredientsDB: IngredientDatabase
+
+    val dummyData= listOf(
+        Ingredients("달걀", "1개", false, "24-05-25", "24-05-25", Nutrients(70, 0.6, 6.3, 4.8)),
+        Ingredients("닭고기", "1개", false, "24-05-25", "24-05-25", Nutrients(215, 0.0, 43.0, 4.5)),
+        Ingredients("대파", "", false, "24-05-26", "24-05-26", Nutrients(64, 15.0, 2.0, 0.0)),
+        Ingredients("당근", "3개", false, "24-05-26", "24-05-26", Nutrients(105, 24.0, 2.0, 0.5)),
+        Ingredients("새우", "1마리", false, "24-05-26", "24-05-26", Nutrients(7, 0.1, 1.5, 0.1))
+    ) // ingredientsDB.ingredientsDao().selectAll()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +47,7 @@ class ListFragment : Fragment() {
 
         val testData = generateTestData() // 테스트 데이터 생성
         val adapter = MyAdapter(testData) // Adapter 생성
+
         recyclerView.adapter = adapter
     }
 
