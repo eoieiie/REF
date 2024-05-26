@@ -5,6 +5,8 @@
     <color name="blue">#1982FF</color>
     <color name="냉장">#8BD8FF</color>
     <color name="냉동">#6EB0FF</color>
+
+    <color name="살짝연한블랙">#5F5F5F</color>
     
     <color name="my_light_primary">#6EB0FF</color>
     <color name="colorPrimaryDark">#005BB5</color>

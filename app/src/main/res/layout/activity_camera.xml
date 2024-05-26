@@ -16,8 +16,8 @@
         <!-- 뒤로가기 버튼 -->
         <ImageButton
             android:id="@+id/btnBack"
-            android:layout_width="48dp"
-            android:layout_height="48dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:src="@drawable/back_icon"
             android:background="@null"
             android:layout_marginStart="8dp"
@@ -45,7 +45,7 @@
             android:textStyle= "bold"
 
             android:text="정보"
-            android:textColor="@color/black"
+            android:textColor="@color/살짝연한블랙"
             android:textSize="18sp"
             android:layout_centerInParent="true"/>
 
