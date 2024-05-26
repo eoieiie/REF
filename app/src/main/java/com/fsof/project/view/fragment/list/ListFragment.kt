@@ -13,14 +13,20 @@ import com.fsof.project.model.entity.Ingredients
 import com.fsof.project.model.nutrients.Nutrients
 import com.fsof.project.model.room.IngredientDatabase
 
+import com.fsof.project.model.room.IngredientDatabase
+import com.fsof.project.model.room.IngredientsDao
+import com.fsof.project.model.entity.Ingredients
+import com.fsof.project.model.nutrients.Nutrients
+
 class ListFragment : Fragment() {
 
     private var _binding: FragmentListBinding? = null
     private val binding get() = _binding!!
 
     private lateinit var recyclerView: RecyclerView
-    private lateinit var db: IngredientDatabase
     private lateinit var adapter: MyAdapter
+
+    private lateinit var ingredientsDB: IngredientDatabase
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,7 +42,8 @@ class ListFragment : Fragment() {
 
         recyclerView = binding.recyclerView
         recyclerView.layoutManager = GridLayoutManager(context, 2)
-
+        
+        // ingredientsDB.ingredientsDao().selectAll()
         // 데이터 생성 및 삽입
         val testData = generateTestData()
         insertDataToDatabase(testData)
@@ -59,7 +66,7 @@ class ListFragment : Fragment() {
 
     private fun insertDataToDatabase(data: List<Ingredients>) {
         for (ingredient in data) {
-            db.ingredientsDao().insertData(ingredient)
+            ingredientsDB.ingredientsDao().insertData(ingredient)
         }
     }
 
