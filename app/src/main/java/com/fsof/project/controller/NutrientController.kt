@@ -7,7 +7,6 @@ import com.fsof.project.model.input.Input
 import com.fsof.project.model.entity.Ingredients
 import com.fsof.project.controller.service.NutrientsService
 import android.util.Log
-import android.widget.Toast
 
 class NutrientController(private val nutrientService: NutrientsService) {
     fun createNutrients(item: Input, callback: (Ingredients?, Throwable?) -> Unit) {
@@ -35,21 +34,3 @@ class NutrientController(private val nutrientService: NutrientsService) {
         })
     }
 }
-
-//class NutrientController(private val nutrientService: NutrientsService) {
-//    fun createNutrients(items: Input, callback: (Ingredients?, Throwable?) -> Unit) {
-//        val call = recipeService.createNutrients(items)
-//        call.enqueue(object : Callback<Ingredients> {
-//            override fun onResponse(call: Call<Ingredients>, response: Response<Ingredients>) {
-//                if (response.isSuccessful) {
-//                    callback(response.body(), null)
-//                } else {
-//                    callback(null, Throwable("Response not successful: ${response.message()}"))
-//                }
-//            }
-//            override fun onFailure(call: Call<Ingredients>, t: Throwable) {
-//                callback(null, t)
-//            }
-//        })
-//    }
-//}

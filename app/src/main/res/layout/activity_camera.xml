@@ -16,14 +16,15 @@
         <!-- 뒤로가기 버튼 -->
         <ImageButton
             android:id="@+id/btnBack"
-            android:layout_width="45dp"
-            android:layout_height="45dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:src="@drawable/back_icon"
             android:background="@null"
             android:layout_marginStart="8dp"
             android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
-            android:scaleType="fitCenter"/>
+            android:scaleType="fitCenter"
+            android:contentDescription="뒤로가기 버튼" />
 
         <!-- 저장 버튼 -->
         <ImageButton
@@ -35,7 +36,8 @@
             android:layout_marginEnd="8dp"
             android:layout_alignParentEnd="true"
             android:layout_centerVertical="true"
-            android:scaleType="fitCenter"/>
+            android:scaleType="fitCenter"
+            android:contentDescription="저장 버튼" />
 
         <!-- 가운데 텍스트 -->
         <TextView
@@ -73,7 +75,7 @@
     <EditText
         android:id="@+id/editIngredientName"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_below="@id/textIngredientNameLabel"
         android:hint="재료명"
         android:inputType="text"
@@ -144,7 +146,7 @@
     <TextView
         android:id="@+id/editRegistrationDate"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_below="@id/textRegistrationDateLabel"
         android:text="yy-MM-dd"
         android:layout_marginStart="16dp"
@@ -167,7 +169,7 @@
     <TextView
         android:id="@+id/editExpirationDate"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_below="@id/textExpirationDateLabel"
         android:text="yy-MM-dd"
         android:layout_marginStart="16dp"
@@ -225,5 +227,4 @@
             android:entries="@array/unit_array"
             android:layout_marginLeft="5dp" />
     </LinearLayout>
-
 </RelativeLayout>
