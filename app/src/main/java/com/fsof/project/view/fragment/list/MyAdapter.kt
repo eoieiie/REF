@@ -1,3 +1,5 @@
+package com.fsof.project.view.fragment.list
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -5,7 +7,7 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.fsof.project.R
 
-class MyAdapter(private val dataList: List<String>) :
+class MyAdapter(private val dataList: List<ItemData>) :
     RecyclerView.Adapter<MyAdapter.ViewHolder>() {
 
     class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -19,7 +21,13 @@ class MyAdapter(private val dataList: List<String>) :
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.textView.text = dataList[position]
+        val item = dataList[position]
+        holder.textView.text = if (item.isInfo) "Info ${position + 1}" else item.content
+
+        holder.itemView.setOnClickListener {
+            item.isInfo = !item.isInfo
+            notifyItemChanged(position)
+        }
     }
 
     override fun getItemCount(): Int {
