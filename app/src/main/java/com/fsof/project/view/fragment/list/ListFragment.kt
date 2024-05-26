@@ -7,16 +7,11 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.fsof.project.R
 import com.fsof.project.databinding.FragmentListBinding
-import com.fsof.project.model.entity.Ingredients
-import com.fsof.project.model.nutrients.Nutrients
-import com.fsof.project.model.room.IngredientDatabase
 
-import com.fsof.project.model.room.IngredientDatabase
-import com.fsof.project.model.room.IngredientsDao
 import com.fsof.project.model.entity.Ingredients
 import com.fsof.project.model.nutrients.Nutrients
+import com.fsof.project.model.room.IngredientDatabase
 
 class ListFragment : Fragment() {
 
@@ -26,14 +21,14 @@ class ListFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: MyAdapter
 
-    private lateinit var ingredientsDB: IngredientDatabase
+    private lateinit var ingredientsDatabase: IngredientDatabase
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentListBinding.inflate(inflater, container, false)
-        db = IngredientDatabase.getInstance(requireContext())
+        ingredientsDatabase = IngredientDatabase.getInstance(requireContext())
         return binding.root
     }
 
@@ -49,7 +44,7 @@ class ListFragment : Fragment() {
         insertDataToDatabase(testData)
 
         // 데이터베이스에서 데이터 가져오기
-        val ingredientList = db.ingredientsDao().selectAll()
+        val ingredientList = ingredientsDatabase.ingredientsDao().selectAll()
         adapter = MyAdapter(ingredientList)
         recyclerView.adapter = adapter
     }
@@ -66,7 +61,7 @@ class ListFragment : Fragment() {
 
     private fun insertDataToDatabase(data: List<Ingredients>) {
         for (ingredient in data) {
-            ingredientsDB.ingredientsDao().insertData(ingredient)
+            ingredientsDatabase.ingredientsDao().insertData(ingredient)
         }
     }
 
