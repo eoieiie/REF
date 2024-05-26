@@ -27,7 +27,7 @@ class Adapter(private val dataList: List<Ingredients>) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = dataList[position]
         holder.textView.text = if (displayInfoList.contains(position)) {
-            "칼로리: ${item.nutrients.calories}kcal\n탄수화물: ${item.nutrients.carbohydrates}g\n단백질: ${item.nutrients.protein}\n지방: ${item.nutrients.fat}"
+            "칼로리: ${item.nutrients.calories}kcal\n탄수화물: ${item.nutrients.carbohydrates}g\n단백질: ${item.nutrients.protein}g\n지방: ${item.nutrients.fat}g"
         } else {
             "${item.name}\n${item.weight}\n${item.expiration_date}"
         }
