@@ -9,20 +9,20 @@ import com.fsof.project.model.entity.Ingredients
 
 @Database(entities = [Ingredients::class], version = 1, exportSchema = false)
 @TypeConverters(ModelConverter::class)
-abstract class IngredientsDatabase: RoomDatabase(){
+abstract class IngredientDatabase: RoomDatabase(){
 
     abstract fun ingredientsDao(): IngredientsDao
 
     companion object{
 
         @Volatile
-        private var INSTANCE: IngredientsDatabase? = null
+        private var INSTANCE: IngredientDatabase? = null
 
-        fun getInstance(context: Context): IngredientsDatabase {
+        fun getInstance(context: Context): IngredientDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    IngredientsDatabase::class.java,
+                    IngredientDatabase::class.java,
                     "app_database"
                 )
                     .allowMainThreadQueries()

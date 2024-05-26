@@ -19,12 +19,15 @@ import java.io.IOException
 import java.text.SimpleDateFormat
 import java.util.*
 import android.app.DatePickerDialog
+import android.database.sqlite.SQLiteConstraintException
 import android.util.Log
 
 import com.fsof.project.R
-import com.fsof.project.model.nutrients.Nutrients
+import com.fsof.project.controller.NutrientController
+import com.fsof.project.controller.client.NutrientClient
 import com.fsof.project.model.entity.Ingredients
-import com.fsof.project.model.room.IngredientsDatabase
+import com.fsof.project.model.input.Input
+import com.fsof.project.model.room.IngredientDatabase
 
 class CameraActivity : AppCompatActivity() {
   
@@ -52,13 +55,22 @@ class CameraActivity : AppCompatActivity() {
                 binding.run {
                     imageView.setImageBitmap(bitmap)
                     editIngredientName.setText(resultStr)
+                    name = resultStr
+                    Log.d("API", name)
                 }
             }
         }
     private val dateFormat = SimpleDateFormat("yy-MM-dd", Locale.getDefault())
+
+    var name: String = ""
+    private var weight: String = "1개"
     private var isFreezed: Boolean = false
     private var up: String = dateFormat.format(Calendar.getInstance().time)
     private var expiration: String = dateFormat.format(Calendar.getInstance().time)
+
+    private lateinit var nutrientController: NutrientController
+
+    private lateinit var ingredientsDB: IngredientDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -68,7 +80,7 @@ class CameraActivity : AppCompatActivity() {
             btnSave.setOnClickListener {
                 saveDataAndReturn()
             }
-            
+
             // camera launch
 //            btnTakePhoto.setOnClickListener {
                 getTmpFileUri().let { uri ->
@@ -77,12 +89,10 @@ class CameraActivity : AppCompatActivity() {
                 }
 //            }
 
-            // name
-
             // Weight
 
             // isFreezed
-            radioGroup.setOnCheckedChangeListener { radioGroup, radioButtonID ->
+            radioGroup.setOnCheckedChangeListener { _, radioButtonID ->
                 when (radioButtonID) {
                     R.id.rightRadioButton -> {
                         isFreezed = true
@@ -102,6 +112,8 @@ class CameraActivity : AppCompatActivity() {
             editExpirationDate.setOnClickListener {
                 showDatePickerDialog()
             }
+
+            nutrientController = NutrientController(NutrientClient.nutrientService)
         }
     }
 
@@ -145,38 +157,44 @@ class CameraActivity : AppCompatActivity() {
     }
     
     private fun saveDataAndReturn() {
-        Toast.makeText(this, "저장되었습니다", Toast.LENGTH_SHORT).show() // testDB()
+        Log.d("API", "${Input(name = name, weight = weight, isFreezed = false, up_date = up, expiration_date = expiration)}")
+
+        // API Networking & Data Storing
+        createNutrients(Input(name = name, weight = weight, isFreezed = false, up_date = up, expiration_date = expiration))
+
         val intent = Intent(this, MainActivity::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
         finish()
     }
 
-    private fun testDB() {
-        val ingredientsDB = IngredientsDatabase.getInstance(this)
+    private fun createNutrients(input: Input) {
+        nutrientController.createNutrients(input) { nutrients, throwable ->
+            runOnUiThread {
+                if (throwable != null) {
+                    Log.d("API", "Error: ${throwable.message}")
+                    Toast.makeText(this, "Error: ${throwable.message}", Toast.LENGTH_SHORT).show()
+                } else if (nutrients != null) {
+                    insertData(nutrients)
+                } else {
+                    Log.d("API", "Unknown error occurred")
+                    Toast.makeText(this, "Unknown error occurred", Toast.LENGTH_SHORT).show()
+                }
+            }
+        }
+    }
 
-//        if (ingredientsDB != null) {
-
-            // 유저 추가
-            val apple = Ingredients(name = "사과", weight = "두봉지", isFreezed = false, upDate = "24-05-30", expirationDate = "24-06-30", nutrients = Nutrients(calories = 20, carbohydrates = 20, protein = 20, fat = 20))
-            ingredientsDB.ingredientsDao().insertData(apple)
-
-//            // 유저 수정
-//            ingredientsDB.userDao().updateNameByUserId(1, "드즈")
-
-            // 유저 출력
-            val ingredientsList = ingredientsDB.ingredientsDao().selectAll()
-            Log.d("DataBase", "ADD: $ingredientsList")
-
-            // 유저 삭제
-            ingredientsDB.ingredientsDao().deleteData(apple)
-            val ingredientsLists = ingredientsDB.ingredientsDao().selectAll()
-            Log.d("DataBase", "Delete: $ingredientsLists")
-
-//            // 유저 선택
-//            val user2 = roomDb.userDao().selectByUserId(2)
-//            Log.d("DB", "User List: $user2")
-
-//        }
+    private fun insertData(ingredient: Ingredients) {
+        ingredientsDB = IngredientDatabase.getInstance(this)
+        try {
+            // if (ingredientsDB != null)
+            ingredientsDB.ingredientsDao().insertData(ingredient)
+            Log.d("DB", "저장 완료")
+            Log.d("DB", "Ingredients List: ${ingredientsDB.ingredientsDao().selectAll()}")
+            Toast.makeText(this, "${ingredient.name} 추가 성공!.", Toast.LENGTH_SHORT).show()
+        } catch (e: SQLiteConstraintException) {
+            Toast.makeText(this, "중복된 식품을 등록하였습니다. 다른 식품으로 다시 등록해주세요.", Toast.LENGTH_SHORT).show()
+            Log.e("DB", "UNIQUE constraint failed: ${e.message}")
+        }
     }
 }

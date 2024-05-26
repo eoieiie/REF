@@ -6,6 +6,6 @@ data class Input(
     @SerializedName("name") val name: String,
     @SerializedName("weight") val weight: String,
     @SerializedName("isFreezed") val isFreezed: Boolean,
-    @SerializedName("up") val up: String,
-    @SerializedName("expiration") val expiration: String
+    @SerializedName("up_date") val up_date: String,
+    @SerializedName("expiration_date") val expiration_date: String
 )

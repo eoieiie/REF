@@ -4,7 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 import com.fsof.project.model.nutrients.Nutrients
-//import com.google.gson.annotations.SerializedName
+//import java.io.Serializable
 
 @Entity(tableName = "Ingredients")
 data class Ingredients(
@@ -12,7 +12,7 @@ data class Ingredients(
     @ColumnInfo("name") val name: String,
     @ColumnInfo("weight") val weight: String,
     @ColumnInfo("isFreezed") val isFreezed: Boolean,
-    @ColumnInfo("up_date") val upDate: String,
-    @ColumnInfo("expiration_date") val expirationDate: String,
+    @ColumnInfo("up_date") val up_date: String,
+    @ColumnInfo("expiration_date") val expiration_date: String,
     @ColumnInfo("nutrients") val nutrients: Nutrients
 )//: Serializable

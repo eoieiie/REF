@@ -4,7 +4,7 @@ import com.google.gson.annotations.SerializedName
 
 data class Nutrients(
     @SerializedName("calories") val calories: Int,
-    @SerializedName("carbohydrates") val carbohydrates: Int,
-    @SerializedName("protein") val protein: Int,
-    @SerializedName("fat") val fat: Int
+    @SerializedName("carbohydrates") val carbohydrates: Double,
+    @SerializedName("protein") val protein: Double,
+    @SerializedName("fat") val fat: Double
 )

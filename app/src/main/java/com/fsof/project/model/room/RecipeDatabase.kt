@@ -16,13 +16,13 @@ abstract class RecipeDatabase: RoomDatabase(){
     companion object{
 
         @Volatile
-        private var INSTANCE: IngredientsDatabase? = null
+        private var INSTANCE: RecipeDatabase? = null
 
-        fun getInstance(context: Context): IngredientsDatabase {
+        fun getInstance(context: Context): RecipeDatabase {
             return INSTANCE ?: synchronized(this) {
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
-                    IngredientsDatabase::class.java,
+                    RecipeDatabase::class.java,
                     "app_database"
                 )
                     .allowMainThreadQueries()
