@@ -51,7 +51,7 @@
         android:layout_height="300dp"
         android:scaleType="fitCenter"
         android:layout_marginHorizontal="16dp"
-        android:layout_below="@id/btnBack"/>
+        android:layout_below="@id/btnSave"/>
 
     <!-- 재료명 텍스트 라벨 -->
     <TextView
