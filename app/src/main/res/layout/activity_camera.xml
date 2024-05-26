@@ -7,42 +7,47 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".view.activity.CameraActivity">
+  
+    <RelativeLayout
+        android:id="@+id/topLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <!-- 뒤로가기 버튼 -->
-<!--    <Button-->
-<!--        android:id="@+id/btnBack"-->
-<!--        android:layout_width="wrap_content"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        android:text="Back icon"-->
-<!--        android:textColor="@color/black"-->
-<!--        android:layout_margin="16dp"-->
-<!--        android:layout_alignParentStart="true"-->
-<!--        android:layout_alignParentTop="true"/>-->
+        <!-- 뒤로가기 버튼 -->
+        <ImageButton
+            android:id="@+id/btnBack"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/back_icon"
+            android:background="@null"
+            android:layout_marginStart="8dp"
+            android:layout_alignParentStart="true"
+            android:layout_centerVertical="true"
+            android:scaleType="fitCenter"/>
 
-    <TextView
-        android:id="@+id/textInfo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="식재료 등록"
-        android:textColor="@color/black"
-        android:textSize="18sp"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="25dp"
-        android:layout_marginBottom="16dp"
-        android:layout_alignParentTop="true" />
-<!--        android:layout_toEndOf="@id/btnBack"-->
-<!--        android:layout_toStartOf="@id/btnSave-->
+        <!-- 저장 버튼 -->
+        <ImageButton
+            android:id="@+id/btnSave"
+            android:layout_width="58dp"
+            android:layout_height="58dp"
+            android:src="@drawable/save_icon"
+            android:background="@null"
+            android:layout_marginEnd="8dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:scaleType="fitCenter"/>
 
-    <!-- 저장 버튼 -->
-    <Button
-        android:id="@+id/btnSave"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="저장"
-        android:textColor="@color/black"
-        android:layout_margin="16dp"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentTop="true"/>
+        <!-- 가운데 텍스트 -->
+        <TextView
+            android:id="@+id/textInfo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle= "bold"
+            android:text="식재료 등록"
+            android:textColor="@color/살짝연한블랙"
+            android:textSize="18sp"
+            android:layout_centerInParent="true"/>
+    </RelativeLayout>
 
     <!-- 이미지 추가 공간 -->
     <ImageView
@@ -51,7 +56,8 @@
         android:layout_height="300dp"
         android:scaleType="fitCenter"
         android:layout_marginHorizontal="16dp"
-        android:layout_below="@id/btnSave"/>
+        android:layout_marginTop="16dp"
+        android:layout_below="@+id/topLayout"/>
 
     <!-- 재료명 텍스트 라벨 -->
     <TextView
