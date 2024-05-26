@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:background="@color/white"
     tools:context=".view.activity.CameraActivity">
-
+  
     <RelativeLayout
         android:id="@+id/topLayout"
         android:layout_width="match_parent"
@@ -43,21 +43,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textStyle= "bold"
-
-            android:text="정보"
+            android:text="식재료 등록"
             android:textColor="@color/살짝연한블랙"
             android:textSize="18sp"
             android:layout_centerInParent="true"/>
-
     </RelativeLayout>
-
-    <!-- 구분선 -->
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="@color/black"
-        android:layout_below="@id/topLayout"/>
 
     <!-- 이미지 추가 공간 -->
     <ImageView
@@ -67,7 +57,7 @@
         android:scaleType="fitCenter"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
-        android:layout_below="@+id/divider"/>
+        android:layout_below="@+id/topLayout"/>
 
     <!-- 재료명 텍스트 라벨 -->
     <TextView
@@ -196,6 +186,15 @@
         android:layout_marginTop="16dp"
         android:layout_marginStart="16dp"/>
 
+    <TextView
+        android:id="@+id/spinnerLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editExpirationDate"
+        android:text="단위"
+        android:layout_marginTop="16dp"
+        android:layout_marginStart="210dp" />
+
     <!-- 재고/수량 입력 필드 -->
     <LinearLayout
         android:layout_width="match_parent"
@@ -220,9 +219,9 @@
             android:id="@+id/spinnerUnit"
             android:layout_centerHorizontal="true"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_weight="0.5"
-            android:padding="12dp"
+            android:padding="13dp"
             android:entries="@array/unit_array"
             android:layout_marginLeft="5dp" />
     </LinearLayout>

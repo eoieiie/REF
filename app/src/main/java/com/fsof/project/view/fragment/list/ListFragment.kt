@@ -1,6 +1,5 @@
 package com.fsof.project.view.fragment.list
 
-import MyAdapter
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +9,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fsof.project.R
 import com.fsof.project.databinding.FragmentListBinding
+
+import MyAdapter
+import androidx.recyclerview.widget.GridLayoutManager
 
 class ListFragment : Fragment() {
 
