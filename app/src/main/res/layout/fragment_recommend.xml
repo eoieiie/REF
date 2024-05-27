@@ -1,10 +1,125 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.fragment.recommend.RecommendFragment">
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <!-- Top Image -->
+    <ImageView
+        android:id="@+id/top_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/top"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="13dp"/>
+
+    <!-- First Section -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/breakfast"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="13dp"
+        android:padding="10dp">
+
+        <!-- First Image -->
+        <ImageView
+            android:id="@+id/morning_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/morning"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+
+        <!-- First Text -->
+        <TextView
+            android:id="@+id/morning_text"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:text="Morning Text"
+            android:layout_toRightOf="@id/morning_image"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"/>
+    </RelativeLayout>
+
+    <!-- Second Section -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/lunch"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="13dp"
+        android:padding="10dp">
+
+        <!-- Second Image -->
+        <ImageView
+            android:id="@+id/noon_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/noon"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+
+        <!-- Second Text -->
+        <TextView
+            android:id="@+id/noon_text"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:text="Noon Text"
+            android:layout_toRightOf="@id/noon_image"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"/>
+    </RelativeLayout>
+
+    <!-- Third Section -->
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/dinner"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="13dp"
+        android:padding="10dp">
+
+        <!-- Third Image -->
+        <ImageView
+            android:id="@+id/night_image"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/night"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"/>
+
+        <!-- Third Text -->
+        <TextView
+            android:id="@+id/night_text"
+            android:layout_width="150dp"
+            android:layout_height="30dp"
+            android:text="Night Text"
+            android:layout_toRightOf="@id/night_image"
+            android:textColor="#FFFFFF"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:layout_centerVertical="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginLeft="10dp"/>
+    </RelativeLayout>
+
+    <!-- Bottom Image -->
+    <ImageView
+        android:id="@+id/bottom_image"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/bottom"
+        android:layout_gravity="center_horizontal"/>
 
     <Button
         android:id="@+id/createRecipeBtn"
@@ -20,4 +135,4 @@
         android:layout_below="@id/createRecipeBtn"
         android:text="recipeText here"
         android:textColor="@android:color/black"/>
-</RelativeLayout>
+</LinearLayout>

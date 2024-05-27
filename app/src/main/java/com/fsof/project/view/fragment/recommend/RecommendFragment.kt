@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.fsof.project.databinding.FragmentRecommendBinding
 
 import com.fsof.project.controller.NutrientController
@@ -44,12 +45,14 @@ class RecommendFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         ingredientsDatabase = IngredientDatabase.getInstance(requireContext())
-        recipeDatabase = RecipeDatabase.getInstance(requireContext())
         nutrientController = NutrientController(NutrientClient.nutrientService)
+
+        recipeDatabase = RecipeDatabase.getInstance(requireContext())
         recipeController = RecipeController(RecipeClient.recipeService)
-        binding.createRecipeBtn.setOnClickListener {
+
+//        binding.createRecipeBtn.setOnClickListener {
             createRecipes(ingredientsDatabase.ingredientsDao().selectAll())
-        }
+//        }
     }
 
     override fun onDestroyView() {
@@ -62,11 +65,13 @@ class RecommendFragment : Fragment() {
             handler.post {
                 if (throwable != null) {
                     Log.d("API", "Error: ${throwable.message}")
+                    activity?.let { Toast.makeText(it, "영양소 생성 실패 ㅠㅠ", Toast.LENGTH_SHORT).show() } // Toast.makeText(getActivity(), "영양소 생성 실패 ㅠㅠ", Toast.LENGTH_SHORT).show()
                 } else if (recipes != null) {
                     Log.d("API", "Recipes: $recipes")
                     binding.recipeText.text = recipes.toString() // binding.recipeText.setText(recipes.toString())
                 } else {
                     Log.d("API", "Unknown error occurred")
+                    activity?.let { Toast.makeText(it, "영양소 생성 실패 ㅠㅠ", Toast.LENGTH_SHORT).show() } // Toast.makeText(getActivity(), "영양소 생성 실패 ㅠㅠ", Toast.LENGTH_SHORT).show()
                 }
             }
         }
