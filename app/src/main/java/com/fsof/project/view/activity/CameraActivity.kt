@@ -62,7 +62,7 @@ class CameraActivity : AppCompatActivity() {
         }
     private val dateFormat = SimpleDateFormat("yy-MM-dd", Locale.getDefault())
 
-    var name: String = ""
+    private lateinit var name: String
     private var weight: String = ""
     private var isFreezed: Boolean = false
     private var up: String = dateFormat.format(Calendar.getInstance().time)
