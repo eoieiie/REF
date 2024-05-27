@@ -8,7 +8,7 @@ import com.fsof.project.model.nutrients.Nutrients
 
 @Entity(tableName = "Ingredients")
 data class Ingredients(
-    @PrimaryKey(autoGenerate = false)
+    @PrimaryKey(autoGenerate = false)// val id: Int,
     @ColumnInfo("name") val name: String,
     @ColumnInfo("weight") val weight: String,
     @ColumnInfo("isFreezed") val isFreezed: Boolean,
