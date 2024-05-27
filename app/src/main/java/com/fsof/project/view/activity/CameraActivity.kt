@@ -185,6 +185,7 @@ class CameraActivity : AppCompatActivity() {
                     Log.d("API", "Error: ${throwable.message}")
                     Toast.makeText(this, "영양소 생성 실패 ㅠㅠ", Toast.LENGTH_SHORT).show()
                 } else if (nutrients != null) {
+                    Log.d("API", "Nutrients: $nutrients")
                     insertData(nutrients)
                 } else {
                     Log.d("API", "Unknown error occurred")
