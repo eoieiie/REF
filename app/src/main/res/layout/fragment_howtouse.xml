@@ -1,0 +1,125 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mobile_app_2"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:clipToOutline="true"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:id="@+id/howToUseLayout"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        tools:ignore="UselessParent">
+
+        <!-- 텍스트뷰를 중앙 상단에 배치 -->
+        <TextView
+            android:id="@+id/howToUseTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="@string/howtouse"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/btnBack2"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/back_icon"
+            android:background="@null"
+            android:layout_marginStart="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:scaleType="fitCenter"/>
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/howToUseLayout"
+        android:orientation="vertical"
+        android:padding="20dp">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="카메라 탭:"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="카메라 탭을 열고 원하는 음식의 사진을 찍습니다.(최대한 음식 사진만 나오도록!)"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="사진을 찍은 후, 다음 정보를 입력하세요:"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="1. 재료명\n2. 보관 방법(냉장 또는 냉동)\n3. 등록 날짜\n4. 소비 기한\n5. 재고 수량"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="홈 탭:"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="입력한 음식 정보는 홈 탭에 자동으로 저장됩니다. 여기서 보관 중인 모든 재료를 한눈에 확인할 수 있습니다."
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="레시피 탭:"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="저장된 재료를 기반으로 아침, 점심, 저녁에 적합한 레시피를 추천받을 수 있습니다."
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="만약 추천받은 레시피가 마음에 들지 않는다면, '다시' 버튼을 눌러 새로운 추천을 받을 수 있습니다."
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="8dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="매일매일 새로운 요리를 즐기며 REF 앱을 활용하세요!"
+            android:textStyle="bold"
+            android:textSize="16sp"
+            android:layout_marginTop="30dp"
+            android:layout_marginBottom="8dp"/>
+    </LinearLayout>
+
+
+</RelativeLayout>
