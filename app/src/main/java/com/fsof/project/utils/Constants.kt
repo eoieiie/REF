@@ -14,3 +14,8 @@ object BuildConfig {
     const val VERSION_CODE: Int = 1
     const val VERSION_NAME: String = "1.0"
 }
+
+object TFLite {
+    const val IMAGENET_CLASSIFY_MODEL = "model_unquant.tflite"
+    const val LABEL_FILE = "labels.txt"
+}
