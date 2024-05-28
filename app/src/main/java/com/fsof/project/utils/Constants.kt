@@ -1,10 +1,10 @@
 package com.fsof.project.utils
-// Secret.kt 로 변경 예정
+
 object APIs {
     const val BASE_URL: String = "http://10.0.2.2:8000/" // 배포 후 수정
     const val TIMEOUT = 30L // 30초
-    const val NUTRIENTS: String = "nutrients" // http://localhost:8000/nutrients
-    const val RECIPES: String = "recipes" // http://localhost:8000/recipes
+    const val NUTRIENTS: String = "nutrients"
+    const val RECIPES: String = "recipes"
 }
 
 object BuildConfig {

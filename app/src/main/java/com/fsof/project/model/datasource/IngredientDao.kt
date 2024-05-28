@@ -1,4 +1,4 @@
-package com.fsof.project.model.room
+package com.fsof.project.model.datasource
 
 import androidx.room.Dao
 import androidx.room.Query
@@ -8,7 +8,7 @@ import androidx.room.Delete
 import com.fsof.project.model.entity.Ingredients
 
 @Dao
-interface IngredientsDao {
+interface IngredientDao {
     @Query("SELECT * FROM Ingredients")
     /*suspend*/ fun selectAll(): List<Ingredients>
 

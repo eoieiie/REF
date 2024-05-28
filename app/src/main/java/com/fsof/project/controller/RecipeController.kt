@@ -3,14 +3,14 @@ package com.fsof.project.controller
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import com.fsof.project.controller.service.RecipeService
-import com.fsof.project.model.entity.Ingredients
-import com.fsof.project.model.entity.Recipes
 import android.util.Log
+import com.fsof.project.model.entity.Recipes
+import com.fsof.project.model.entity.Ingredients
+import com.fsof.project.model.repository.RecipeRepository
 
-class RecipeController(private val recipeService: RecipeService) {
+class RecipeController(private val recipeRepository: RecipeRepository) {
     fun createRecipe(items: List<Ingredients>, callback: (Recipes?, Throwable?) -> Unit) {
-        val call = recipeService.createRecipe(items)
+        val call = recipeRepository.createRecipes(items)
         call.enqueue(object : Callback<Recipes> {
             override fun onResponse(call: Call<Recipes>, response: Response<Recipes>) {
                 Log.d("API", "request onResponse")

@@ -10,7 +10,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.fsof.project.databinding.ActivityGalleryBinding
-import com.fsof.project.controller.Classifier
+import com.fsof.project.controller.camera.Classifier
 import java.io.IOException
 import java.util.*
 

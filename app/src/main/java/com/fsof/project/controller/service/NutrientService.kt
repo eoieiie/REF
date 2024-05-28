@@ -4,10 +4,10 @@ import com.fsof.project.utils.APIs
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST
-import com.fsof.project.model.input.Input
+import com.fsof.project.model.entity.IngredientInfo
 import com.fsof.project.model.entity.Ingredients
 
-interface NutrientsService {
+interface NutrientService {
     @POST(APIs.NUTRIENTS)
-    /*suspend*/ fun createNutrients(@Body item: Input): Call<Ingredients>
+    /*suspend*/ fun createNutrients(@Body item: IngredientInfo): Call<Ingredients>
 }

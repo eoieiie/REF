@@ -44,7 +44,7 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/morning_image"
             android:gravity="center"
-            android:text="Morning Text"
+            android:text="아침 메뉴 추천"
             android:textColor="#FFFFFF"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -79,7 +79,7 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/noon_image"
             android:gravity="center"
-            android:text="Noon Text"
+            android:text="점심 메뉴 추천"
             android:textColor="#FFFFFF"
             android:textSize="24sp"
             android:textStyle="bold" />
@@ -114,7 +114,7 @@
             android:layout_marginLeft="10dp"
             android:layout_toRightOf="@id/night_image"
             android:gravity="center"
-            android:text="Night Text"
+            android:text="저녁 메뉴 추천"
             android:textColor="#FFFFFF"
             android:textSize="24sp"
             android:textStyle="bold" />
