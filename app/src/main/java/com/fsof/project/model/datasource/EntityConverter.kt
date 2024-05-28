@@ -5,8 +5,6 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.fsof.project.model.entity.Nutrient
 import com.fsof.project.model.entity.Meal
-//import com.fsof.project.model.entity.Ingredients
-//import com.fsof.project.model.entity.Recipes
 
 class EntityConverter {
     // Ingredients
@@ -21,6 +19,7 @@ class EntityConverter {
         return Gson().fromJson(nutrientsString, nutrientsType)
     }
 
+    // import com.fsof.project.model.entity.Ingredients
 //    @TypeConverter
 //    fun ingredientsJsonToList(value: List<Ingredients>?): String? {
 //        return Gson().toJson(value)
@@ -45,6 +44,7 @@ class EntityConverter {
         return Gson().fromJson(mealString, mealType)
     }
 
+    // import com.fsof.project.model.entity.Recipes
 //    @TypeConverter
 //    fun recipeJsonToJson(list: List<Recipes>?) = Gson().toJson(list)
 ////    fun listToJson(value: List<Recipes>?): String? {

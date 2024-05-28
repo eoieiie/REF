@@ -21,6 +21,7 @@ import java.util.*
 import android.app.DatePickerDialog
 import android.database.sqlite.SQLiteConstraintException
 import android.util.Log
+import androidx.activity.result.ActivityResultLauncher
 
 import com.fsof.project.R
 import com.fsof.project.controller.NutrientController
@@ -28,56 +29,44 @@ import com.fsof.project.controller.client.NutrientClient
 import com.fsof.project.model.entity.Ingredients
 import com.fsof.project.model.entity.IngredientInfo
 import com.fsof.project.model.datasource.IngredientDatabase
+import com.fsof.project.model.repository.NutrientRepository
 
 class CameraActivity : AppCompatActivity() {
   
     private val binding by lazy { ActivityCameraBinding.inflate(layoutInflater) } // private val binding by lazy { ActivityCameraBinding.inflate(layoutInflater, null, false) }
+
     private lateinit var classifier: Classifier
     private var imageUri: Uri? = null
-    private val cameraResult =
-        registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess: Boolean ->
-            if (isSuccess.not()) return@registerForActivityResult
-            val selectedImage = imageUri ?: return@registerForActivityResult
-            var bitmap: Bitmap? = null
-            try {
-                bitmap = if (Build.VERSION.SDK_INT >= 28) {
-                    val src = ImageDecoder.createSource(contentResolver, selectedImage)
-                    ImageDecoder.decodeBitmap(src)
-                } else {
-                    MediaStore.Images.Media.getBitmap(contentResolver, selectedImage)
-                }
-            } catch (exception: IOException) {
-                Toast.makeText(this, "Can not load image!!", Toast.LENGTH_SHORT).show()
-            }
-            bitmap?.let {
-                val output = classifier.classify(bitmap)
-                val resultStr = String.format(Locale.ENGLISH, "%s", output.first)
-                binding.run {
-                    imageView.setImageBitmap(bitmap)
-                    editIngredientName.setText(resultStr)
-                    name = resultStr
-                    Log.d("API", name)
-                }
-            }
-        }
+    private lateinit var cameraResult: ActivityResultLauncher<Uri>
+
+    private lateinit var ingredientsDB: IngredientDatabase
+    private lateinit var nutrientController: NutrientController
+    private lateinit var nutrientRepository: NutrientRepository
+
     private val dateFormat = SimpleDateFormat("yy-MM-dd", Locale.getDefault())
 
-    private lateinit var name: String
-    private var weight: String = ""
+    private lateinit var name: String // = ""
+    private lateinit var weight: String // = ""
     private var isFreezed: Boolean = false
     private var up: String = dateFormat.format(Calendar.getInstance().time)
     private var expiration: String = dateFormat.format(Calendar.getInstance().time)
 
-    private lateinit var nutrientController: NutrientController
-
-    private lateinit var ingredientsDB: IngredientDatabase
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        // init
         initClassifier()
+        initCameraResult()
+        nutrientRepository = NutrientRepository(NutrientClient.nutrientService)
+        nutrientController = NutrientController(nutrientRepository)
+
+        // viewBinding
         binding.run {
             btnSave.setOnClickListener {
+                // init
+                name = binding.editIngredientName.text.toString()
+                weight = "${binding.editStock.text}${binding.spinnerUnit.selectedItem}"
+
                 saveDataAndReturn()
             }
 
@@ -110,8 +99,6 @@ class CameraActivity : AppCompatActivity() {
             editExpirationDate.setOnClickListener {
                 showDatePickerDialog()
             }
-
-            nutrientController = NutrientController(NutrientClient.nutrientService)
         }
     }
 
@@ -129,6 +116,34 @@ class CameraActivity : AppCompatActivity() {
         }
     }
 
+    private fun initCameraResult() {
+        cameraResult = registerForActivityResult(ActivityResultContracts.TakePicture()) { isSuccess: Boolean ->
+            if (isSuccess.not()) return@registerForActivityResult
+            val selectedImage = imageUri ?: return@registerForActivityResult
+            var bitmap: Bitmap? = null
+            try {
+                bitmap = if (Build.VERSION.SDK_INT >= 28) {
+                    val src = ImageDecoder.createSource(contentResolver, selectedImage)
+                    ImageDecoder.decodeBitmap(src)
+                } else {
+                    MediaStore.Images.Media.getBitmap(contentResolver, selectedImage)
+                }
+            } catch (exception: IOException) {
+                Toast.makeText(this, "Can not load image!!", Toast.LENGTH_SHORT).show()
+            }
+            bitmap?.let {
+                val output = classifier.classify(bitmap)
+                val resultStr = String.format(Locale.ENGLISH, "%s", output.first)
+                binding.run {
+                    imageView.setImageBitmap(bitmap)
+                    editIngredientName.setText(resultStr)
+                    name = resultStr
+                    Log.d("API", name)
+                }
+            }
+        }
+    }
+
     private fun getTmpFileUri(): Uri {
         val tmpFile = File.createTempFile("tmp_image_file", ".png", cacheDir).apply {
             createNewFile()
@@ -136,14 +151,6 @@ class CameraActivity : AppCompatActivity() {
         }
         return FileProvider.getUriForFile(applicationContext, "${BuildConfig.APPLICATION_ID}.provider", tmpFile)
     }
-
-//    private fun returnWeight() {
-//        if ((binding.editStock.text).isNotEmpty()) {
-//            val combinedValue = "${binding.editStock.text}${binding.spinnerUnit.selectedItem}"
-//        } else {
-//            Toast.makeText(this, "재고를 입력하세요", Toast.LENGTH_SHORT).show()
-//        }
-//    }
     
     private fun showDatePickerDialog() {
         val calendar = Calendar.getInstance()
@@ -151,7 +158,7 @@ class CameraActivity : AppCompatActivity() {
             this,
             { _, selectedYear, selectedMonth, selectedDay ->
                 calendar.set(selectedYear, selectedMonth, selectedDay)
-//                Log.d("calendar", dateFormat.format(calendar.time))
+                Log.d("calendar", dateFormat.format(calendar.time))
                 binding.editExpirationDate.text = dateFormat.format(calendar.time)
                 expiration = dateFormat.format(calendar.time)
             },
@@ -163,19 +170,13 @@ class CameraActivity : AppCompatActivity() {
     }
     
     private fun saveDataAndReturn() {
-        // name
-        name = binding.editIngredientName.text.toString()
-        // weight
-        weight = "${binding.editStock.text}${binding.spinnerUnit.selectedItem}"
-
         Log.d("API", "${IngredientInfo(name = name, weight = weight, isFreezed = false, up_date = up, expiration_date = expiration)}")
 
-        // API Networking & Data Storing
-        if (binding.editStock.text.toString() != "") {
+//        if (binding.editStock.text.toString() != "") { // 재고 입력 없을 경우 걸러주기
             createNutrients(IngredientInfo(name = name, weight = weight, isFreezed = false, up_date = up, expiration_date = expiration))
-        } else {
-            Toast.makeText(this, "재고를 입력해주세요.", Toast.LENGTH_SHORT).show()
-        }
+//        } else {
+//            Toast.makeText(this, "재고를 입력해주세요.", Toast.LENGTH_SHORT).show()
+//        }
     }
 
     private fun createNutrients(input: IngredientInfo) {

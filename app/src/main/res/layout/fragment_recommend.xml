@@ -36,8 +36,8 @@
         <!-- First Text -->
         <TextView
             android:id="@+id/morning_text"
-            android:layout_width="150dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="아침 메뉴 추천"
             android:textColor="#FFFFFF"
             android:textSize="24sp"
@@ -70,8 +70,8 @@
         <!-- Second Text -->
         <TextView
             android:id="@+id/noon_text"
-            android:layout_width="150dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="점심 메뉴 추천"
             android:textColor="#FFFFFF"
             android:textSize="24sp"
@@ -104,8 +104,8 @@
         <!-- Third Text -->
         <TextView
             android:id="@+id/night_text"
-            android:layout_width="150dp"
-            android:layout_height="30dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:text="저녁 메뉴 추천"
             android:textColor="#FFFFFF"
             android:textSize="24sp"

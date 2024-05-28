@@ -12,23 +12,19 @@ import android.widget.RelativeLayout
 import android.widget.Toast
 import com.fsof.project.databinding.FragmentRecommendBinding
 
-import com.fsof.project.controller.NutrientController
 import com.fsof.project.controller.RecipeController
-import com.fsof.project.controller.client.NutrientClient
 import com.fsof.project.controller.client.RecipeClient
-import com.fsof.project.model.datasource.IngredientDatabase
-import com.fsof.project.model.datasource.RecipeDatabase
 import com.fsof.project.model.entity.Ingredients
+import com.fsof.project.model.datasource.IngredientDatabase
+import com.fsof.project.model.repository.RecipeRepository
 
 class RecommendFragment : Fragment() {
 
     private var _binding: FragmentRecommendBinding? = null
     private val binding get() = _binding!!
 
-    private lateinit var nutrientController: NutrientController
     private lateinit var recipeController: RecipeController
-
-    private lateinit var recipeDatabase: RecipeDatabase
+    private lateinit var recipeRepository: RecipeRepository
     private lateinit var ingredientsDatabase: IngredientDatabase
 
     private lateinit var morningIngredients: List<String>
@@ -51,12 +47,10 @@ class RecommendFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        // init
         ingredientsDatabase = IngredientDatabase.getInstance(requireContext())
-        nutrientController = NutrientController(NutrientClient.nutrientService)
-
-        recipeDatabase = RecipeDatabase.getInstance(requireContext())
-        recipeController = RecipeController(RecipeClient.recipeService)
+        recipeRepository = RecipeRepository(RecipeClient.recipeService)
+        recipeController = RecipeController(recipeRepository)
 
 //        binding.createRecipeBtn.setOnClickListener {
             createRecipes(ingredientsDatabase.ingredientsDao().selectAll())

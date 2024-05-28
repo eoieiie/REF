@@ -20,14 +20,14 @@ class ListFragment : Fragment() {
     private lateinit var recyclerView: RecyclerView
     private lateinit var adapter: Adapter
 
-    private lateinit var ingredientsDatabase: IngredientDatabase
+    private lateinit var ingredientDatabase: IngredientDatabase
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         _binding = FragmentListBinding.inflate(inflater, container, false)
-        ingredientsDatabase = IngredientDatabase.getInstance(requireContext())
+        ingredientDatabase = IngredientDatabase.getInstance(requireContext())
         return binding.root
     }
 
@@ -37,7 +37,7 @@ class ListFragment : Fragment() {
         recyclerView = binding.recyclerView
         recyclerView.layoutManager = GridLayoutManager(context, 2)
 
-        val ingredientList = ingredientsDatabase.ingredientsDao().selectAll()
+        val ingredientList = ingredientDatabase.ingredientsDao().selectAll()
         adapter = Adapter(ingredientList)
         recyclerView.adapter = adapter
     }

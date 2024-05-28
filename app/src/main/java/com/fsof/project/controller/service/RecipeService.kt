@@ -9,5 +9,5 @@ import com.fsof.project.model.entity.Recipes
 
 interface RecipeService {
     @POST(APIs.RECIPES)
-    /*suspend*/ fun createRecipe(@Body items: List<Ingredients>): Call<Recipes>
+    /*suspend*/ fun createRecipes(@Body items: List<Ingredients>): Call<Recipes>
 }
