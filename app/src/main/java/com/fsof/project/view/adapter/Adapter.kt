@@ -1,4 +1,4 @@
-package com.fsof.project.view.fragment.list
+package com.fsof.project.view.adapter
 
 import android.view.LayoutInflater
 import android.view.View

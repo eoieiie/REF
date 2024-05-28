@@ -3,13 +3,13 @@ package com.fsof.project.controller
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import com.fsof.project.model.input.Input
+import com.fsof.project.model.entity.IngredientInfo
 import com.fsof.project.model.entity.Ingredients
-import com.fsof.project.controller.service.NutrientsService
+import com.fsof.project.controller.service.NutrientService
 import android.util.Log
 
-class NutrientController(private val nutrientService: NutrientsService) {
-    fun createNutrients(item: Input, callback: (Ingredients?, Throwable?) -> Unit) {
+class NutrientController(private val nutrientService: NutrientService) {
+    fun createNutrients(item: IngredientInfo, callback: (Ingredients?, Throwable?) -> Unit) {
         val call = nutrientService.createNutrients(item)
         call.enqueue(object : Callback<Ingredients> {
             override fun onResponse(call: Call<Ingredients>, response: Response<Ingredients>) {

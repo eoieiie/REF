@@ -1,4 +1,4 @@
-package com.fsof.project.model.recipes
+package com.fsof.project.model.entity
 
 import com.google.gson.annotations.SerializedName
 

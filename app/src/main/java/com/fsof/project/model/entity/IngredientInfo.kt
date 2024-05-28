@@ -1,8 +1,8 @@
-package com.fsof.project.model.input
+package com.fsof.project.model.entity
 
 import com.google.gson.annotations.SerializedName
 
-data class Input(
+data class IngredientInfo(
     @SerializedName("name") val name: String,
     @SerializedName("weight") val weight: String,
     @SerializedName("isFreezed") val isFreezed: Boolean,

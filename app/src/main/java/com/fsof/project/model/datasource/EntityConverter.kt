@@ -1,23 +1,23 @@
-package com.fsof.project.model.room
+package com.fsof.project.model.datasource
 
 import androidx.room.TypeConverter
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
-import com.fsof.project.model.nutrients.Nutrients
-import com.fsof.project.model.recipes.Meal
+import com.fsof.project.model.entity.Nutrient
+import com.fsof.project.model.entity.Meal
 //import com.fsof.project.model.entity.Ingredients
 //import com.fsof.project.model.entity.Recipes
 
-class ModelConverter {
+class EntityConverter {
     // Ingredients
     @TypeConverter
-    fun fromNutrients(nutrients: Nutrients): String {
+    fun fromNutrients(nutrients: Nutrient): String {
         return Gson().toJson(nutrients)
     }
 
     @TypeConverter
-    fun toNutrients(nutrientsString: String): Nutrients {
-        val nutrientsType = object : TypeToken<Nutrients>() {}.type
+    fun toNutrients(nutrientsString: String): Nutrient {
+        val nutrientsType = object : TypeToken<Nutrient>() {}.type
         return Gson().fromJson(nutrientsString, nutrientsType)
     }
 

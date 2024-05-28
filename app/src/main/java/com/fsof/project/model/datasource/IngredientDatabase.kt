@@ -1,4 +1,4 @@
-package com.fsof.project.model.room
+package com.fsof.project.model.datasource
 
 import android.content.Context
 import androidx.room.Database
@@ -8,10 +8,10 @@ import androidx.room.TypeConverters
 import com.fsof.project.model.entity.Ingredients
 
 @Database(entities = [Ingredients::class], version = 1, exportSchema = false)
-@TypeConverters(ModelConverter::class)
+@TypeConverters(EntityConverter::class)
 abstract class IngredientDatabase: RoomDatabase(){
 
-    abstract fun ingredientsDao(): IngredientsDao
+    abstract fun ingredientsDao(): IngredientDao
 
     companion object{
 

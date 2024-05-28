@@ -16,8 +16,8 @@ import com.fsof.project.controller.NutrientController
 import com.fsof.project.controller.RecipeController
 import com.fsof.project.controller.client.NutrientClient
 import com.fsof.project.controller.client.RecipeClient
-import com.fsof.project.model.room.IngredientDatabase
-import com.fsof.project.model.room.RecipeDatabase
+import com.fsof.project.model.datasource.IngredientDatabase
+import com.fsof.project.model.datasource.RecipeDatabase
 import com.fsof.project.model.entity.Ingredients
 
 class RecommendFragment : Fragment() {

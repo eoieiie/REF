@@ -1,4 +1,4 @@
-package com.fsof.project.controller
+package com.fsof.project.controller.camera
 
 import android.content.Context
 import android.graphics.Bitmap

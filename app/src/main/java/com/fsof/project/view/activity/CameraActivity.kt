@@ -11,7 +11,7 @@ import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
-import com.fsof.project.controller.Classifier
+import com.fsof.project.controller.camera.Classifier
 import com.fsof.project.databinding.ActivityCameraBinding
 import com.fsof.project.utils.BuildConfig
 import java.io.File
@@ -26,8 +26,8 @@ import com.fsof.project.R
 import com.fsof.project.controller.NutrientController
 import com.fsof.project.controller.client.NutrientClient
 import com.fsof.project.model.entity.Ingredients
-import com.fsof.project.model.input.Input
-import com.fsof.project.model.room.IngredientDatabase
+import com.fsof.project.model.entity.IngredientInfo
+import com.fsof.project.model.datasource.IngredientDatabase
 
 class CameraActivity : AppCompatActivity() {
   
@@ -168,17 +168,17 @@ class CameraActivity : AppCompatActivity() {
         // weight
         weight = "${binding.editStock.text}${binding.spinnerUnit.selectedItem}"
 
-        Log.d("API", "${Input(name = name, weight = weight, isFreezed = false, up_date = up, expiration_date = expiration)}")
+        Log.d("API", "${IngredientInfo(name = name, weight = weight, isFreezed = false, up_date = up, expiration_date = expiration)}")
 
         // API Networking & Data Storing
         if (binding.editStock.text.toString() != "") {
-            createNutrients(Input(name = name, weight = weight, isFreezed = false, up_date = up, expiration_date = expiration))
+            createNutrients(IngredientInfo(name = name, weight = weight, isFreezed = false, up_date = up, expiration_date = expiration))
         } else {
             Toast.makeText(this, "재고를 입력해주세요.", Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun createNutrients(input: Input) {
+    private fun createNutrients(input: IngredientInfo) {
         nutrientController.createNutrients(input) { nutrients, throwable ->
             runOnUiThread {
                 if (throwable != null) {

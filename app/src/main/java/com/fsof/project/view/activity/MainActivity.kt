@@ -13,7 +13,7 @@ import com.fsof.project.R
 
 class MainActivity : AppCompatActivity() {
 
-    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater, null, false) } // private lateinit var binding: ActivityMainBinding
+    private val binding by lazy { ActivityMainBinding.inflate(layoutInflater, null, false) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root) // setContentView(R.layout.activity_main)
 
         setBottomNavigationView()
-        // 기본 프래그먼트 설정
+
         if (savedInstanceState == null) {
             binding.bottomNavigationView.selectedItemId = R.id.fragment_list
         }
