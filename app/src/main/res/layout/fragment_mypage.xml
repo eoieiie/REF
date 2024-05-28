@@ -9,7 +9,7 @@
     <RelativeLayout
         android:id="@+id/mypageLayout"
         android:layout_width="match_parent"
-        android:layout_height="58dp"
+        android:layout_height="50dp"
         tools:ignore="UselessParent">
 
         <!-- 텍스트뷰를 중앙 상단에 배치 -->
