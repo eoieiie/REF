@@ -10,35 +10,40 @@
     <RelativeLayout
         android:id="@+id/topLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="50dp"
         tools:ignore="MissingConstraints">
 
-        <!-- 저장 버튼 -->
-        <ImageButton
+        <!-- 수정 버튼 -->
+        <Button
             android:id="@+id/btnSave"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
-            android:src="@drawable/edit_icon"
-            android:background="@null"
-            android:layout_marginEnd="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="수정"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:scaleType="fitCenter"
-            android:contentDescription="저장 버튼" />
+            android:layout_centerVertical="true"/>
 
         <!-- 가운데 텍스트 -->
         <TextView
             android:id="@+id/textInfo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textStyle= "bold"
-
+            android:textStyle="bold"
             android:text="식재료"
             android:textColor="@color/black"
             android:textSize="18sp"
-            android:layout_centerInParent="true"/>
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"/>
 
     </RelativeLayout>
+
+
+
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"

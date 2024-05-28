@@ -11,7 +11,7 @@
     <RelativeLayout
         android:id="@+id/topLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="50dp">
 
         <!-- 뒤로가기 버튼 -->
         <ImageButton
@@ -27,17 +27,17 @@
             android:contentDescription="뒤로가기 버튼" />
 
         <!-- 저장 버튼 -->
-        <ImageButton
+        <Button
             android:id="@+id/btnSave"
-            android:layout_width="58dp"
-            android:layout_height="58dp"
-            android:src="@drawable/save_icon"
-            android:background="@null"
-            android:layout_marginEnd="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="10dp"
+            android:text="저장"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold"
             android:layout_alignParentEnd="true"
-            android:layout_centerVertical="true"
-            android:scaleType="fitCenter"
-            android:contentDescription="저장 버튼" />
+            android:layout_centerVertical="true"/>
 
         <!-- 가운데 텍스트 -->
         <TextView
@@ -46,7 +46,7 @@
             android:layout_height="wrap_content"
             android:textStyle= "bold"
             android:text="식재료 등록"
-            android:textColor="@color/살짝연한블랙"
+            android:textColor="@color/black"
             android:textSize="18sp"
             android:layout_centerInParent="true"/>
     </RelativeLayout>
