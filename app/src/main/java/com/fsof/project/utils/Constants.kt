@@ -19,3 +19,10 @@ object TFLite {
     const val IMAGENET_CLASSIFY_MODEL = "model_unquant.tflite"
     const val LABEL_FILE = "labels.txt"
 }
+
+object Alarm {
+    const val NOTIFICATION_ID = 0
+    const val CHANNEL_ID = "channel_id"
+    const val CHANNEL_NAME = "ChannelName"
+    const val ALARM_TIME = 10
+}
