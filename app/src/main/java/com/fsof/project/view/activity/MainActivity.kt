@@ -33,7 +33,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var alarmManager: AlarmManager
     private lateinit var pendingIntent: PendingIntent
 
-    private val alarmTimes = listOf("24-05-29", "24-05-30") // 알람이 울릴 날짜들
+    private val alarmTimes = listOf("24-05-29", "24-05-30")
 
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
@@ -50,12 +50,12 @@ class MainActivity : AppCompatActivity() {
         // binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root) // setContentView(R.layout.activity_main)
 
+        // Request Permission
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(
                     this, Manifest.permission.POST_NOTIFICATIONS
                 ) != PackageManager.PERMISSION_GRANTED
             ) {
-                // 권한 요청
                 requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
         }
@@ -67,9 +67,7 @@ class MainActivity : AppCompatActivity() {
             PendingIntent.FLAG_IMMUTABLE
         )
 
-        // 알람을 울릴 날짜인지 확인하고 울릴 경우 알람 예약
         checkAndSetAlarm()
-
         setAlarm()
 
         setBottomNavigationView()
@@ -113,7 +111,6 @@ class MainActivity : AppCompatActivity() {
         ).commit()
     }
 
-    // 알람을 울릴 날짜인지 확인하고 울릴 경우 알람 예약
     private fun checkAndSetAlarm() {
         val currentDate = SimpleDateFormat("yy-MM-dd", Locale.getDefault()).format(Date())
         if (currentDate in alarmTimes) {
@@ -121,7 +118,6 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    // 알람 예약
     private fun setAlarm() {
         val triggerTime = (SystemClock.elapsedRealtime() + ALARM_TIME * 1000) // 예약 시간을 현재로부터 10초 후로 설정
         alarmManager.set(
@@ -132,9 +128,8 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "알람이 예약되었습니다.", Toast.LENGTH_SHORT).show()
     }
 
-    // 알람 취소
     private fun cancelAlarm() {
         alarmManager.cancel(pendingIntent)
-//        Toast.makeText(this, "알람이 취소되었습니다.", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "알람이 취소되었습니다.", Toast.LENGTH_SHORT).show()
     }
 }

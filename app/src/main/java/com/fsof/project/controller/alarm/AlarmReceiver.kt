@@ -29,9 +29,9 @@ class AlarmReceiver : BroadcastReceiver() {
         val contentIntent = Intent(context, MainActivity::class.java)
         val contentPendingIntent = PendingIntent.getActivity(
             context,
-            NOTIFICATION_ID, // requestCode
-            contentIntent, // 알림 클릭 시 이동할 인텐트
-            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE // or PendingIntent.FLAG_MUTABLE
+            NOTIFICATION_ID,
+            contentIntent,
+            PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE // PendingIntent.FLAG_MUTABLE
             /*
             1. FLAG_UPDATE_CURRENT : 현재 PendingIntent를 유지하고, 대신 인텐트의 extra data는 새로 전달된 Intent로 교체
             2. FLAG_CANCEL_CURRENT : 현재 인텐트가 이미 등록되어있다면 삭제, 다시 등록
@@ -63,12 +63,12 @@ class AlarmReceiver : BroadcastReceiver() {
             2. IMPORTANCE_DEFAULT = 알림음 울림
             3. IMPORTANCE_LOW = 알림음 없음
             4. IMPORTANCE_MIN = 알림음 없고 상태줄 표시 X
-             */
+            */
         )
-        notificationChannel.enableLights(true) // 불빛
-//            notificationChannel.lightColor = Color.RED // 색상
-        notificationChannel.enableVibration(true) // 진동 여부
-        notificationChannel.description = "채널의 상세정보입니다." // 채널 정보
+        notificationChannel.enableLights(true)
+//            notificationChannel.lightColor = Color.RED
+        notificationChannel.enableVibration(true)
+        notificationChannel.description = "채널의 상세정보입니다."
         notificationManager.createNotificationChannel(
             notificationChannel)
 //        }
