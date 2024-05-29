@@ -11,6 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.fsof.project.databinding.ActivityGalleryBinding
 import com.fsof.project.controller.camera.Classifier
+import com.fsof.project.utils.TFLite
 import java.io.IOException
 import java.util.*
 
@@ -55,7 +56,7 @@ class GalleryActivity : AppCompatActivity() {
     }
 
     private fun initClassifier() {
-        classifier = Classifier(this, Classifier.IMAGENET_CLASSIFY_MODEL)
+        classifier = Classifier(this, TFLite.IMAGENET_CLASSIFY_MODEL)
         try {
             classifier.init()
         } catch (exception: IOException) {

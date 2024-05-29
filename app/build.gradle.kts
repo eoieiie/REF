@@ -10,7 +10,7 @@ android {
 
     defaultConfig {
         applicationId = "com.fsof.project"
-        minSdk = 21
+        minSdk = 26
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
@@ -22,7 +22,6 @@ android {
     }
     buildFeatures {
         viewBinding = true
-//        compose = true
     }
     buildTypes {
         release {
@@ -62,20 +61,20 @@ dependencies {
     implementation(libs.tflite.support)
 
     // RoomDB
-    implementation(libs.room.runtime) // implementation("androidx.room:room-runtime:2.6.1")
+    implementation(libs.room.runtime)
     implementation(libs.room.ktx)
     // To use Kotlin annotation processing tool (KSP) // (kapt)
-    ksp(libs.room.compiler) // ksp("androidx.room:room-compiler:2.6.1") // kapt("androidx.room:room-compiler:2.6.1") // annotationProcessor("androidx.room:room-compiler:2.6.1")
+    ksp(libs.room.compiler) // annotationProcessor("androidx.room:room-compiler:2.6.1")
 
     // Retrofit
-    implementation(libs.retrofit) // implementation("com.squareup.retrofit2:retrofit:2.11.0")
-    implementation(libs.gson) // implementation("com.squareup.retrofit2:converter-gson:2.11.0")
+    implementation(libs.retrofit)
+    implementation(libs.gson)
 
     // Okhttp
     // define a BOM and its version
     // implementation(platform("com.squareup.okhttp3:okhttp-bom:4.12.0"))
 
     // define any required OkHttp artifacts without version
-    implementation(libs.okhttp) // implementation("com.squareup.okhttp3:okhttp") // implementation("com.squareup.okhttp3:okhttp:4.12.0")
-    implementation(libs.loging.interceptor) // implementation("com.squareup.okhttp3:logging-interceptor") // implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
+    implementation(libs.okhttp)
+    implementation(libs.loging.interceptor)
 }

@@ -14,6 +14,13 @@ import androidx.core.content.FileProvider
 import com.fsof.project.controller.camera.Classifier
 import com.fsof.project.databinding.ActivityCameraBinding
 import com.fsof.project.utils.BuildConfig
+import com.fsof.project.controller.NutrientController
+import com.fsof.project.controller.client.NutrientClient
+import com.fsof.project.model.entity.Ingredients
+import com.fsof.project.model.entity.IngredientInfo
+import com.fsof.project.model.datasource.IngredientDatabase
+import com.fsof.project.model.repository.NutrientRepository
+import com.fsof.project.utils.TFLite
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat
@@ -24,12 +31,6 @@ import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 
 import com.fsof.project.R
-import com.fsof.project.controller.NutrientController
-import com.fsof.project.controller.client.NutrientClient
-import com.fsof.project.model.entity.Ingredients
-import com.fsof.project.model.entity.IngredientInfo
-import com.fsof.project.model.datasource.IngredientDatabase
-import com.fsof.project.model.repository.NutrientRepository
 
 class CameraActivity : AppCompatActivity() {
   
@@ -108,7 +109,7 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun initClassifier() {
-        classifier = Classifier(this, Classifier.IMAGENET_CLASSIFY_MODEL)
+        classifier = Classifier(this, TFLite.IMAGENET_CLASSIFY_MODEL)
         try {
             classifier.init()
         } catch (exception: IOException) {

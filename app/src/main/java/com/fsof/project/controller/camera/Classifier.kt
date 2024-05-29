@@ -2,6 +2,7 @@ package com.fsof.project.controller.camera
 
 import android.content.Context
 import android.graphics.Bitmap
+import com.fsof.project.utils.TFLite
 import org.tensorflow.lite.support.common.FileUtil
 import org.tensorflow.lite.support.common.ops.NormalizeOp
 import org.tensorflow.lite.support.image.ImageProcessor
@@ -23,7 +24,7 @@ class Classifier(private var context: Context, private val modelName: String) {
     fun init() {
         model = Model.createModel(context, modelName)
         initModelShape()
-        labels.addAll(FileUtil.loadLabels(context, LABEL_FILE))
+        labels.addAll(FileUtil.loadLabels(context, TFLite.LABEL_FILE))
     }
 
     private fun initModelShape() {
@@ -72,10 +73,5 @@ class Classifier(private var context: Context, private val modelName: String) {
 
     fun finish() {
         if (::model.isInitialized) model.close()
-    }
-
-    companion object {
-        const val IMAGENET_CLASSIFY_MODEL = "model_unquant.tflite"
-        const val LABEL_FILE = "labels.txt"
     }
 }
