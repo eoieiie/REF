@@ -3,7 +3,6 @@ package com.fsof.project.view.activity
 import android.Manifest
 import android.content.Intent
 import android.os.Bundle
-import android.os.SystemClock
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.fsof.project.view.fragment.list.ListFragment
@@ -16,13 +15,14 @@ import android.app.AlarmManager
 import android.app.PendingIntent
 import android.content.pm.PackageManager
 import android.os.Build
-import android.widget.Toast
+import android.util.Log // import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContextCompat
 import com.fsof.project.controller.alarm.AlarmReceiver
-import com.fsof.project.utils.Alarm.ALARM_TIME
+import com.fsof.project.model.datasource.IngredientDatabase
 import com.fsof.project.utils.Alarm.NOTIFICATION_ID
 import java.text.SimpleDateFormat
+import java.util.Calendar
 import java.util.Date
 import java.util.Locale
 
@@ -33,15 +33,15 @@ class MainActivity : AppCompatActivity() {
     private lateinit var alarmManager: AlarmManager
     private lateinit var pendingIntent: PendingIntent
 
-    private val alarmTimes = listOf("24-05-29", "24-05-30")
+    private lateinit var ingredientDatabase: IngredientDatabase
 
     private val requestPermissionLauncher = registerForActivityResult(
         ActivityResultContracts.RequestPermission()
     ) { isGranted: Boolean ->
         if (isGranted) {
-            // 권한이 허용되었을 때의 동작
+            Log.d("Alarm", "Permission Accepted")
         } else {
-            // 권한이 거부되었을 때의 동작
+            Log.d("Alarm", "Permission Denied")
         }
     }
 
@@ -49,6 +49,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         // binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root) // setContentView(R.layout.activity_main)
+
+        ingredientDatabase = IngredientDatabase.getInstance(this)
 
         // Request Permission
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
@@ -68,7 +70,6 @@ class MainActivity : AppCompatActivity() {
         )
 
         checkAndSetAlarm()
-        setAlarm()
 
         setBottomNavigationView()
 
@@ -112,24 +113,48 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun checkAndSetAlarm() {
-        val currentDate = SimpleDateFormat("yy-MM-dd", Locale.getDefault()).format(Date())
-        if (currentDate in alarmTimes) {
-            setAlarm()
+        val ingredientList = ingredientDatabase.ingredientsDao().selectAll().map { it.expiration_date }.distinct()
+        Log.d("Alarm", ingredientList.toString())
+        ingredientList.forEach { expirationDate ->
+            setAlarm(expirationDate)
         }
     }
 
-    private fun setAlarm() {
-        val triggerTime = (SystemClock.elapsedRealtime() + ALARM_TIME * 1000) // 예약 시간을 현재로부터 10초 후로 설정
+    private fun setAlarm(expirationDate: String) {
+        val dateFormat = SimpleDateFormat("yy-MM-dd", Locale.getDefault())
+        val date = dateFormat.parse(expirationDate)
+
+        val calendar = Calendar.getInstance().apply {
+            time = date as Date // as Date TypeCasting
+            set(Calendar.HOUR_OF_DAY, 10)
+            set(Calendar.MINUTE, 15)
+            set(Calendar.SECOND, 0)
+        }
+
+        val intent = Intent(this, AlarmReceiver::class.java).apply {
+            putExtra("expirationDate", expirationDate)
+        }
+        val pendingIntent = PendingIntent.getBroadcast(
+            this, expirationDate.hashCode(), intent,
+            PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
+
         alarmManager.set(
             AlarmManager.ELAPSED_REALTIME_WAKEUP,
-            triggerTime,
+            calendar.timeInMillis,
             pendingIntent
         )
-        Toast.makeText(this, "알람이 예약되었습니다.", Toast.LENGTH_SHORT).show()
+
+        Log.d("Alarm", "${expirationDate}에 알람이 예약되었습니다.") // Toast.makeText(this, "${expirationDate}에 알람이 예약되었습니다.", Toast.LENGTH_SHORT).show()
     }
 
-    private fun cancelAlarm() {
+    private fun cancelAlarm(expirationDate: String) {
+        val intent = Intent(this, AlarmReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(
+            this, expirationDate.hashCode(), intent,
+            PendingIntent.FLAG_MUTABLE or PendingIntent.FLAG_UPDATE_CURRENT
+        )
         alarmManager.cancel(pendingIntent)
-        Toast.makeText(this, "알람이 취소되었습니다.", Toast.LENGTH_SHORT).show()
+        Log.d("Alarm", "${expirationDate}에 알람이 취소되었습니다..") // Toast.makeText(this, "${expirationDate}에 알람이 취소되었습니다.", Toast.LENGTH_SHORT).show()
     }
 }
