@@ -48,10 +48,8 @@ class GalleryActivity : AppCompatActivity() {
         setContentView(binding.root)
         initClassifier()
         getContent.launch("image/*")
-        binding.run {
-            btnSelectPhoto.setOnClickListener {
-                getContent.launch("image/*")
-            }
+        binding.btnSelectPhoto.setOnClickListener {
+            getContent.launch("image/*")
         }
     }
 

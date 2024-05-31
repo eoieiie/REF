@@ -40,10 +40,17 @@ class AlarmActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
+        alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
         sharedPreferences = getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE)
         ingredientDatabase = IngredientDatabase.getInstance(this)
+        binding.toggleAlarm.isChecked = getAlarmState()
+        accessPermission()
+        initCalendar()
+        isToggleChanged()
+        isTimePickerChanged()
+    }
 
+    private fun accessPermission() {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             if (ContextCompat.checkSelfPermission(
                     this, Manifest.permission.POST_NOTIFICATIONS
@@ -52,11 +59,16 @@ class AlarmActivity : AppCompatActivity() {
                 requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS)
             }
         }
+    }
 
-        alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
+    private fun initCalendar() {
+        val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"))
+        binding.timePicker.setIs24HourView(true)
+        binding.timePicker.hour = calendar.get(Calendar.HOUR_OF_DAY)
+        binding.timePicker.minute = calendar.get(Calendar.MINUTE)
+    }
 
-        binding.toggleAlarm.isChecked = getAlarmState()
-
+    private fun isToggleChanged() {
         binding.toggleAlarm.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 checkAndSetAlarm()
@@ -66,12 +78,9 @@ class AlarmActivity : AppCompatActivity() {
                 saveAlarmState(false)
             }
         }
+    }
 
-        val calendar = Calendar.getInstance(TimeZone.getTimeZone("Asia/Seoul"))
-        binding.timePicker.setIs24HourView(true)
-        binding.timePicker.hour = calendar.get(Calendar.HOUR_OF_DAY)
-        binding.timePicker.minute = calendar.get(Calendar.MINUTE)
-
+    private fun isTimePickerChanged() {
         binding.timePicker.setOnTimeChangedListener { _, _, _ ->
             if (binding.toggleAlarm.isChecked) {
                 cancelAllAlarms()
@@ -99,8 +108,7 @@ class AlarmActivity : AppCompatActivity() {
             set(Calendar.HOUR_OF_DAY, binding.timePicker.hour)
             set(Calendar.MINUTE, binding.timePicker.minute)
             set(Calendar.SECOND, 0)
-            // 소비기한 알람을 D-3 으로 설정
-            add(Calendar.DAY_OF_MONTH, -3)
+            add(Calendar.DAY_OF_MONTH, -3) // 소비기한 알람을 D-3 으로 설정
         }
 
         val intent = Intent(this, AlarmReceiver::class.java).apply {

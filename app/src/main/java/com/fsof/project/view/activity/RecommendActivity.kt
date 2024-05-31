@@ -1,6 +1,5 @@
 package com.fsof.project.view.activity
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.fsof.project.databinding.ActivityRecommendBinding
