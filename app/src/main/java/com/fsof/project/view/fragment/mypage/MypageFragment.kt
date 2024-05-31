@@ -1,5 +1,6 @@
 package com.fsof.project.view.fragment.mypage
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.commit
 import com.fsof.project.databinding.FragmentMypageBinding
 import com.fsof.project.R
-import com.fsof.project.view.fragment.mypage.HowToUseFragment
+import com.fsof.project.view.activity.AlarmActivity
 
 class MypageFragment : Fragment() {
 
@@ -18,13 +19,18 @@ class MypageFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View ? {
+    ): View {
         _binding = FragmentMypageBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.btnGo0.setOnClickListener {
+            val intent = Intent(activity, AlarmActivity::class.java)
+            startActivity(intent)
+        }
 
         binding.btnGo1.setOnClickListener {
             // 여기서 ChangeInfoFragment() 인스턴스를 생성하여 replaceFragment 메서드에 전달합니다.
