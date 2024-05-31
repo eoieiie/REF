@@ -1,5 +1,6 @@
 package com.fsof.project.view.fragment.recommend
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -8,10 +9,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.fsof.project.databinding.FragmentRecommendBinding
+import com.fsof.project.view.activity.RecommendActivity
 import android.widget.RelativeLayout
 import android.widget.Toast
-import com.fsof.project.databinding.FragmentRecommendBinding
-
 import com.fsof.project.controller.RecipeController
 import com.fsof.project.controller.client.RecipeClient
 import com.fsof.project.model.entity.Ingredients
@@ -52,9 +53,28 @@ class RecommendFragment : Fragment() {
         recipeRepository = RecipeRepository(RecipeClient.recipeService)
         recipeController = RecipeController(recipeRepository)
 
-//        binding.createRecipeBtn.setOnClickListener {
-            createRecipes(ingredientsDatabase.ingredientsDao().selectAll())
-//        }
+        createRecipes(ingredientsDatabase.ingredientsDao().selectAll())
+
+        binding.morningText.setOnClickListener {
+            navigateToDetail("아침 메뉴", morningIngredients, morningDetailedInstructions)
+        }
+
+        binding.noonText.setOnClickListener {
+            navigateToDetail("점심 메뉴", lunchIngredients, lunchDetailedInstructions)
+        }
+
+        binding.nightText.setOnClickListener {
+            navigateToDetail("저녁 메뉴", dinnerIngredients, dinnerDetailedInstructions)
+        }
+    }
+
+    private fun navigateToDetail(name: String, ingredients: List<String>, detailedInstructions: String) {
+        val intent = Intent(requireContext(), RecommendActivity::class.java).apply {
+            putExtra("name", name)
+            putExtra("ingredients", ingredients.toTypedArray())
+            putExtra("detailedInstructions", detailedInstructions)
+        }
+        startActivity(intent)
     }
 
     override fun onDestroyView() {
