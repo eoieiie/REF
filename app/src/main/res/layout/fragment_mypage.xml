@@ -55,10 +55,40 @@
     </RelativeLayout>
 
     <RelativeLayout
-        android:id="@+id/changeInfo"
+        android:id="@+id/setAlarm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/yourREF"
+        android:layout_marginTop="20dp">
+
+        <TextView
+            android:id="@+id/setAlarmText"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="알람 설정"
+            android:layout_marginLeft="40dp"
+            android:textSize="18sp"
+            android:textStyle="bold">
+        </TextView>
+
+        <ImageButton
+            android:id="@+id/btnGo0"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/go_icon"
+            android:background="@null"
+            android:layout_marginEnd="20dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:scaleType="fitCenter"/>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/changeInfo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/setAlarm"
         android:layout_marginTop="20dp">
 
         <TextView
