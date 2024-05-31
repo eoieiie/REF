@@ -7,9 +7,8 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
-import android.util.Log
-import android.widget.Toast
 import androidx.core.app.NotificationCompat
+import android.util.Log  // import android.widget.Toast
 import com.fsof.project.R
 import com.fsof.project.utils.Alarm.CHANNEL_ID
 import com.fsof.project.utils.Alarm.CHANNEL_NAME

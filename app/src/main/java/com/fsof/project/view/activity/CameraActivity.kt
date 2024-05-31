@@ -33,8 +33,8 @@ import androidx.activity.result.ActivityResultLauncher
 import com.fsof.project.R
 
 class CameraActivity : AppCompatActivity() {
-  
-    private val binding by lazy { ActivityCameraBinding.inflate(layoutInflater) } // private val binding by lazy { ActivityCameraBinding.inflate(layoutInflater, null, false) }
+
+    private val binding by lazy { ActivityCameraBinding.inflate(layoutInflater, null, false) }
 
     private lateinit var classifier: Classifier
     private var imageUri: Uri? = null
@@ -55,57 +55,59 @@ class CameraActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        // init
-        initClassifier()
-        initCameraResult()
         nutrientRepository = NutrientRepository(NutrientClient.nutrientService)
         nutrientController = NutrientController(nutrientRepository)
-
-        // viewBinding
-        binding.run {
-            btnSave.setOnClickListener {
-                // init
-                name = binding.editIngredientName.text.toString()
-                weight = "${binding.editStock.text}${binding.spinnerUnit.selectedItem}"
-
-                saveDataAndReturn()
-            }
-
-            // camera launch
-//            btnTakePhoto.setOnClickListener {
-                getTmpFileUri().let { uri ->
-                    imageUri = uri
-                    cameraResult.launch(uri)
-                }
-//            }
-
-            // isFreezed
-            radioGroup.setOnCheckedChangeListener { _, radioButtonID ->
-                when (radioButtonID) {
-                    R.id.rightRadioButton -> {
-                        isFreezed = true
-                    }
-                    R.id.rightRadioButton -> {
-                        isFreezed = false
-                    }
-                }
-//                Log.d("Radio", "$isFreezed")
-            }
-
-            // up
-            editRegistrationDate.text = up
-
-            // expiration
-            editExpirationDate.text = expiration
-            editExpirationDate.setOnClickListener {
-                showDatePickerDialog()
-            }
-        }
+        initClassifier()
+        initCameraResult()
+        save()
+        launchCamera()
+        setFreezed()
+        initInput()
     }
 
     override fun onDestroy() {
         classifier.finish()
         super.onDestroy()
+    }
+
+    private fun save() {
+        binding.btnSave.setOnClickListener {
+            name = binding.editIngredientName.text.toString()
+            weight = "${binding.editStock.text}${binding.spinnerUnit.selectedItem}"
+
+            saveDataAndReturn()
+        }
+    }
+
+    private fun launchCamera() {
+//        binding.btnTakePhoto.setOnClickListener {
+            getTmpFileUri().let { uri ->
+                imageUri = uri
+                cameraResult.launch(uri)
+            }
+//        }
+    }
+
+    private fun setFreezed() {
+        binding.radioGroup.setOnCheckedChangeListener { _, radioButtonID ->
+            when (radioButtonID) {
+                R.id.rightRadioButton -> {
+                    isFreezed = true
+                }
+                R.id.rightRadioButton -> {
+                    isFreezed = false
+                }
+            }
+            // Log.d("Radio", "$isFreezed")
+        }
+    }
+
+    private fun initInput() {
+        binding.editRegistrationDate.text = up
+        binding.editExpirationDate.text = expiration
+        binding.editExpirationDate.setOnClickListener {
+            showDatePickerDialog()
+        }
     }
 
     private fun initClassifier() {
