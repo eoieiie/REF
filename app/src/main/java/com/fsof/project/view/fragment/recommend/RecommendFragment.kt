@@ -10,18 +10,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.fsof.project.databinding.FragmentRecommendBinding
-import com.fsof.project.view.activity.RecommendActivity
-import android.widget.RelativeLayout
+
+import com.fsof.project.R
 import android.widget.Toast
 import com.bumptech.glide.Glide
+import android.widget.RelativeLayout
 import com.bumptech.glide.RequestManager
-import com.fsof.project.R
 import com.fsof.project.controller.RecipeController
 import com.fsof.project.controller.client.RecipeClient
 import com.fsof.project.model.entity.Ingredients
 import com.fsof.project.model.datasource.IngredientDatabase
 import com.fsof.project.model.entity.Recipes
 import com.fsof.project.model.repository.RecipeRepository
+import com.fsof.project.view.activity.RecommendActivity
 
 class RecommendFragment : Fragment() {
 
@@ -77,13 +78,13 @@ class RecommendFragment : Fragment() {
 
     private fun openDetails(recipe: Recipes) {
         binding.morningText.setOnClickListener {
-            navigateToDetail("아침 메뉴", recipe.breakfast.ingredients, recipe.breakfast.detailedInstructions)
+            navigateToDetail(recipe.breakfast.name, recipe.breakfast.ingredients, recipe.breakfast.detailedInstructions)
         }
         binding.noonText.setOnClickListener {
-            navigateToDetail("점심 메뉴", recipe.lunch.ingredients, recipe.lunch.detailedInstructions)
+            navigateToDetail(recipe.lunch.name, recipe.lunch.ingredients, recipe.lunch.detailedInstructions)
         }
         binding.nightText.setOnClickListener {
-            navigateToDetail("저녁 메뉴", recipe.dinner.ingredients, recipe.dinner.detailedInstructions)
+            navigateToDetail(recipe.dinner.name, recipe.dinner.ingredients, recipe.dinner.detailedInstructions)
         }
     }
 

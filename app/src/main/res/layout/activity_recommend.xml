@@ -14,34 +14,41 @@
         android:textStyle="bold"
         android:layout_gravity="center"/>
 
+    <ImageView
+        android:id="@+id/food"
+        android:layout_width="300dp"
+        android:layout_height="300dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="16dp" />
+
     <TextView
         android:id="@+id/ingredients_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Ingredients:"
+        android:text="재료"
         android:textSize="20sp"
         android:layout_marginTop="16dp"/>
 
     <TextView
         android:id="@+id/ingredients"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Ingredient list"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:text="재료 데이터"
         android:layout_marginTop="8dp"/>
 
     <TextView
         android:id="@+id/detailed_instructions_label"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Detailed Instructions:"
+        android:text="조리법"
         android:textSize="20sp"
         android:layout_marginTop="16dp"/>
 
     <TextView
         android:id="@+id/detailed_instructions"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Instructions"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:text="조리법 데이터"
         android:layout_marginTop="8dp"/>
 
     <Button

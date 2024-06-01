@@ -5,6 +5,7 @@ object APIs {
     const val TIMEOUT = 30L // 30초
     const val NUTRIENTS: String = "nutrients"
     const val RECIPES: String = "recipes"
+    const val FOODS: String = "foods"
 }
 
 object BuildConfig {
