@@ -13,6 +13,9 @@ import com.fsof.project.databinding.FragmentRecommendBinding
 import com.fsof.project.view.activity.RecommendActivity
 import android.widget.RelativeLayout
 import android.widget.Toast
+import com.bumptech.glide.Glide
+import com.bumptech.glide.RequestManager
+import com.fsof.project.R
 import com.fsof.project.controller.RecipeController
 import com.fsof.project.controller.client.RecipeClient
 import com.fsof.project.model.entity.Ingredients
@@ -28,6 +31,8 @@ class RecommendFragment : Fragment() {
     private lateinit var recipeController: RecipeController
     private lateinit var recipeRepository: RecipeRepository
     private lateinit var ingredientsDatabase: IngredientDatabase
+
+    private lateinit var glide: RequestManager
 
     private val handler = Handler(Looper.getMainLooper())
 
@@ -45,6 +50,10 @@ class RecommendFragment : Fragment() {
         ingredientsDatabase = IngredientDatabase.getInstance(requireContext())
         recipeRepository = RecipeRepository(RecipeClient.recipeService)
         recipeController = RecipeController(recipeRepository)
+
+        glide = Glide.with(this)
+        glide.load(R.raw.fire).override(650, 650).into(binding.fireGif)
+
         createRecipes(ingredientsDatabase.ingredientsDao().selectAll()) { recipes ->
             recipes.let {
                 if (it != null) {
@@ -57,6 +66,7 @@ class RecommendFragment : Fragment() {
                     }
                 }
             }
+            glide.clear(binding.fireGif)
         }
     }
 
