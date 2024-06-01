@@ -19,5 +19,5 @@ interface IngredientDao {
     /*suspend*/ fun updateData(ingredients: Ingredients)
 
     @Delete
-   /*suspend*/ fun deleteData(ingredients: Ingredients)
+    /*suspend*/ fun deleteData(ingredients: Ingredients)
 }
