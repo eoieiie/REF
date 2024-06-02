@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.fsof.project"
+    namespace = "com.fsof.ref_client"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.fsof.project"
+        applicationId = "com.fsof.ref_client"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
