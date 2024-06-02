@@ -11,31 +11,33 @@
         android:orientation="vertical"
         android:padding="16dp">
 
-        <LinearLayout
+        <RelativeLayout
+            android:id="@+id/topLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:layout_height="50dp">
 
+            <!-- 뒤로가기 버튼 -->
             <ImageButton
                 android:id="@+id/back_button"
                 android:layout_width="48dp"
                 android:layout_height="48dp"
                 android:src="@drawable/back_icon"
                 android:background="@null"
+                android:layout_marginStart="8dp"
                 android:scaleType="fitCenter"
-                android:contentDescription="뒤로가기 버튼"
-                android:layout_marginRight="72dp" />
+                android:contentDescription="뒤로가기 버튼" />
 
+            <!-- 가운데 텍스트 -->
             <TextView
                 android:id="@+id/recipe_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Recipe Name"
-                android:textSize="24sp"
                 android:textStyle="bold"
-                android:textColor="@android:color/black"/>
-        </LinearLayout>
+                android:text="Recipe Name"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:layout_centerInParent="true"/>
+        </RelativeLayout>
 
         <ImageView
             android:id="@+id/food"

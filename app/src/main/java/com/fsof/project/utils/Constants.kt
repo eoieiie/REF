@@ -1,8 +1,8 @@
 package com.fsof.project.utils
 
 object APIs {
-    const val BASE_URL: String = "http://10.0.2.2:8000/" // 배포 후 수정
-    const val TIMEOUT = 30L // 30초
+    const val BASE_URL: String = "https://port-0-ref-server-1mrfs72llwxvw3wk.sel5.cloudtype.app/" // "http://10.0.2.2:8000/"
+    const val TIMEOUT = 30L
     const val NUTRIENTS: String = "nutrients"
     const val RECIPES: String = "recipes"
     const val FOODS: String = "foods"
