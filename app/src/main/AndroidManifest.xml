@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.fsof.project">
+    package="com.fsof.ref_client">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
@@ -19,7 +19,7 @@
         android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Project"
+        android:theme="@style/Theme.REF_Client"
         tools:targetApi="31">
         <activity
             android:name=".view.activity.RecommendActivity"
@@ -54,7 +54,7 @@
 
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.fsof.project.provider"
+            android:authorities="com.fsof.ref_client.provider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -72,5 +72,4 @@
             <!-- </intent-filter> -->
         </receiver>
     </application>
-
 </manifest>
