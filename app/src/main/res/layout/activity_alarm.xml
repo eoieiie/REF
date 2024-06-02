@@ -1,22 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mobile_app_0"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:andrroid="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:id="@+id/alarmLayout"
+        android:layout_width="match_parent"
+        android:layout_height="58dp"
+        tools:ignore="UselessParent">
+
+        <!-- 텍스트뷰를 중앙 상단에 배치 -->
+        <TextView
+            android:id="@+id/alarmTxt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_centerVertical="true"
+            android:text="@string/alarm"
+            android:textColor="#000000"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <ImageButton
+            android:id="@+id/btnBack0"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:src="@drawable/back_icon"
+            android:background="@null"
+            android:layout_marginStart="10dp"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:scaleType="fitCenter"/>
+    </RelativeLayout>
 
     <ToggleButton
         android:id="@+id/toggle_alarm"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textOff="Alarm Off"
-        android:textOn="Alarm On" />
+        android:textOn="Alarm On"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"/>
 
     <TimePicker
         android:id="@+id/time_picker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
         android:layout_marginTop="16dp"
+        android:layout_marginRight="10dp"
         android:calendarViewShown="false"
-        android:datePickerMode="spinner"/>
+        android:datePickerMode="spinner" />
+
 </LinearLayout>
