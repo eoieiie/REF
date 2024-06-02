@@ -10,9 +10,11 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.ImageButton
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
+import com.fsof.project.R
 import com.fsof.project.controller.alarm.AlarmReceiver
 import com.fsof.project.databinding.ActivityAlarmBinding
 import com.fsof.project.model.datasource.IngredientDatabase
@@ -40,6 +42,15 @@ class AlarmActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
+        setContentView(R.layout.activity_alarm)  // XML 레이아웃을 설정
+
+        // btnBack0 이미지 버튼의 참조를 얻어옵니다.
+        val btnBack = findViewById<ImageButton>(R.id.btnBack0)
+        // btnBack0에 클릭 리스너를 설정합니다.
+        btnBack.setOnClickListener {
+            // 버튼 클릭 시 현재 액티비티를 종료하고 이전 화면으로 돌아갑니다.
+            finish()
+        }
         alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
         sharedPreferences = getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE)
         ingredientDatabase = IngredientDatabase.getInstance(this)

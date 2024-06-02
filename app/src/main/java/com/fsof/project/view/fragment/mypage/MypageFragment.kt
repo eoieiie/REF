@@ -20,6 +20,7 @@ class MypageFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        // Inflate the layout for this fragment using view binding
         _binding = FragmentMypageBinding.inflate(inflater, container, false)
         return binding.root
     }
@@ -27,48 +28,33 @@ class MypageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        // Setup button listeners for each action in the MyPage menu
         binding.btnGo0.setOnClickListener {
+            // Start AlarmActivity when the button is clicked
             val intent = Intent(activity, AlarmActivity::class.java)
             startActivity(intent)
         }
 
-        binding.btnGo1.setOnClickListener {
-            // 여기서 ChangeInfoFragment() 인스턴스를 생성하여 replaceFragment 메서드에 전달합니다.
-            replaceFragment(ChangeInfoFragment())
-        }
-        binding.btnGo2.setOnClickListener {
-            // 여기서 HowToUseFragment() 인스턴스를 생성하여 replaceFragment 메서드에 전달합니다.
-            replaceFragment(HowToUseFragment())
-        }
-        binding.btnGo3.setOnClickListener {
-            // 여기서 QnaFragment() 인스턴스를 생성하여 replaceFragment 메서드에 전달합니다.
-            replaceFragment(QnaFragment())
-        }
-        binding.btnGo4.setOnClickListener {
-            // 여기서 ShareAppFragment() 인스턴스를 생성하여 replaceFragment 메서드에 전달합니다.
-            replaceFragment(ShareAppFragment())
-        }
-        binding.btnGo5.setOnClickListener {
-            // 여기서 SendOpinionFragment() 인스턴스를 생성하여 replaceFragment 메서드에 전달합니다.
-            replaceFragment(SendOpinionFragment())
-        }
-        binding.btnGo6.setOnClickListener {
-            // 여기서 SupportFragment() 인스턴스를 생성하여 replaceFragment 메서드에 전달합니다.
-            replaceFragment(SupportFragment())
-        }
+        // Setup other buttons to replace the current fragment with other fragments
+        binding.btnGo1.setOnClickListener { replaceFragment(ChangeInfoFragment()) }
+        binding.btnGo2.setOnClickListener { replaceFragment(HowToUseFragment()) }
+        binding.btnGo3.setOnClickListener { replaceFragment(QnaFragment()) }
+        binding.btnGo4.setOnClickListener { replaceFragment(ShareAppFragment()) }
+        binding.btnGo5.setOnClickListener { replaceFragment(SendOpinionFragment()) }
+        binding.btnGo6.setOnClickListener { replaceFragment(SupportFragment()) }
     }
-
 
     private fun replaceFragment(fragment: Fragment) {
+        // Perform fragment transaction to replace the current fragment
         parentFragmentManager.commit {
-            // 'main_frame'은 프래그먼트를 교체할 뷰의 ID입니다.
-            // 이 ID는 fragment_mypage.xml 내에 정의된 특정 레이아웃의 ID여야 합니다.
-            replace(R.id.mobile_app_main, fragment)
-            addToBackStack(null)  // 선택사항: 트랜잭션을 백 스택에 추가합니다.
+            replace(R.id.mobile_app_main, fragment) // Ensure this container ID is correct
+            addToBackStack(null) // Optional: add transaction to the back stack
         }
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
-        _binding = null  // Clear binding when view is destroyed
+        // Clean up the binding when view is destroyed to avoid memory leaks
+        _binding = null
     }
 }
