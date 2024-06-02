@@ -12,15 +12,17 @@
         android:padding="16dp">
 
         <!-- Top Image -->
+
+        <!-- First Section -->
         <ImageView
             android:id="@+id/top_image"
-            android:layout_width="wrap_content"
+            android:layout_width="400dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="13dp"
+            android:scaleType="fitXY"
             android:src="@drawable/top" />
 
-        <!-- First Section -->
         <RelativeLayout
             android:id="@+id/first_section"
             android:layout_width="match_parent"
@@ -128,8 +130,9 @@
         <!-- Bottom Image -->
         <ImageView
             android:id="@+id/bottom_image"
-            android:layout_width="wrap_content"
+            android:layout_width="400dp"
             android:layout_height="wrap_content"
+            android:scaleType="fitXY"
             android:layout_gravity="center"
             android:src="@drawable/bottom" />
     </LinearLayout>
@@ -138,7 +141,7 @@
     <ImageView
         android:id="@+id/fire_gif"
         android:layout_width="match_parent"
-        android:layout_height="650dp"
+        android:layout_height="750dp"
         android:layout_gravity="center"
         android:layout_marginTop="75dp"
         android:scaleType="centerCrop" />
