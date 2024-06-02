@@ -46,8 +46,8 @@ class CameraActivity : AppCompatActivity() {
 
     private val dateFormat = SimpleDateFormat("yy-MM-dd", Locale.getDefault())
 
-    private lateinit var name: String
-    private lateinit var weight: String
+    private lateinit var name: String // = ""
+    private lateinit var weight: String // = ""
     private var isFreezed: Boolean = false
     private var up: String = dateFormat.format(Calendar.getInstance().time)
     private var expiration: String = dateFormat.format(Calendar.getInstance().time)
@@ -63,7 +63,6 @@ class CameraActivity : AppCompatActivity() {
         launchCamera()
         setFreezed()
         initInput()
-        initBackButton() // 뒤로가기 버튼 초기화 메서드 호출
     }
 
     override fun onDestroy() {
@@ -81,10 +80,12 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun launchCamera() {
-        getTmpFileUri().let { uri ->
-            imageUri = uri
-            cameraResult.launch(uri)
-        }
+//        binding.btnTakePhoto.setOnClickListener {
+            getTmpFileUri().let { uri ->
+                imageUri = uri
+                cameraResult.launch(uri)
+            }
+//        }
     }
 
     private fun setFreezed() {
@@ -97,6 +98,7 @@ class CameraActivity : AppCompatActivity() {
                     isFreezed = false
                 }
             }
+            // Log.d("Radio", "$isFreezed")
         }
     }
 
@@ -159,6 +161,7 @@ class CameraActivity : AppCompatActivity() {
             this,
             { _, selectedYear, selectedMonth, selectedDay ->
                 calendar.set(selectedYear, selectedMonth, selectedDay)
+                Log.d("calendar", dateFormat.format(calendar.time))
                 binding.editExpirationDate.text = dateFormat.format(calendar.time)
                 expiration = dateFormat.format(calendar.time)
             },
@@ -170,7 +173,13 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun saveDataAndReturn() {
-        createNutrients(IngredientInfo(name = name, weight = weight, isFreezed = false, up_date = up, expiration_date = expiration))
+        Log.d("API", "${IngredientInfo(name = name, weight = weight, isFreezed = false, up_date = up, expiration_date = expiration)}")
+
+//        if (binding.editStock.text.toString() != "") { // 재고 입력 없을 경우 걸러주기
+            createNutrients(IngredientInfo(name = name, weight = weight, isFreezed = false, up_date = up, expiration_date = expiration))
+//        } else {
+//            Toast.makeText(this, "재고를 입력해주세요.", Toast.LENGTH_SHORT).show()
+//        }
     }
 
     private fun createNutrients(input: IngredientInfo) {
@@ -193,6 +202,7 @@ class CameraActivity : AppCompatActivity() {
     private fun insertData(ingredient: Ingredients) {
         ingredientsDB = IngredientDatabase.getInstance(this)
         try {
+            // if (ingredientsDB != null)
             ingredientsDB.ingredientsDao().insertData(ingredient)
             Log.d("DB", "저장 완료")
             Log.d("DB", "Ingredients List: ${ingredientsDB.ingredientsDao().selectAll()}")
@@ -212,11 +222,5 @@ class CameraActivity : AppCompatActivity() {
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
         startActivity(intent)
         finish()
-    }
-
-    private fun initBackButton() {
-        binding.btnBack.setOnClickListener {
-            launchCamera() // 뒤로가기 버튼 클릭 시 카메라 실행
-        }
     }
 }
