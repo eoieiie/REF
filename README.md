@@ -58,6 +58,26 @@ AI 기반 냉장고 식재료 관리 서비스, 레프
 
 ## Git
 
+### Convention
+
+✨ [feat]: a new feature
+
+🐛 [fix]: a bug fix
+
+🪛 [chore]: updating build tasks, package manager configs
+
+🎨 [style]: formatting, missing semi colons
+
+♻️ [refactor]: refactoring production code
+
+➕ [add]: adding something
+
+🔥 [del]: deleting something
+
+✅ [test]: adding tests, refactoring test; no production code change
+
+📝 [docs]: changes to documentation
+
 ### Branch Strategy
 
 Git Flow 참고
