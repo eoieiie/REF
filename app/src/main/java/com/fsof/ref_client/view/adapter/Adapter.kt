@@ -1,57 +1,101 @@
 package com.fsof.ref_client.view.adapter
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.fsof.ref_client.databinding.ItemLayoutBinding
 import com.fsof.ref_client.model.entity.Ingredients
 import com.fsof.ref_client.R
 
-class Adapter(private val dataList: List<Ingredients>) :
-    RecyclerView.Adapter<Adapter.ViewHolder>() {
+class Adapter(
+    private var dataList: List<Ingredients>,
+    private val itemClickListener: (Ingredients, Boolean) -> Unit
+) : RecyclerView.Adapter<Adapter.ViewHolder>() {
 
+    private val selectedItems = mutableSetOf<Ingredients>()
     private val displayInfoList = mutableSetOf<Int>()
+    private var isEditMode = false
 
-    class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-        val textView: TextView = view.findViewById(R.id.textView)
-    }
+    class ViewHolder(val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_layout, parent, false)
-        return ViewHolder(view)
+        val binding = ItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return ViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val item = dataList[position]
 
-        // 클릭 시 영양 정보 표시
+        // 아이템 선택 기능 추가
         holder.itemView.setOnClickListener {
-            if (displayInfoList.contains(position)) {
-                displayInfoList.remove(position)
+            if (isEditMode) {
+                val isSelected = selectedItems.contains(item)
+                if (isSelected) {
+                    selectedItems.remove(item)
+                } else {
+                    selectedItems.add(item)
+                }
+                itemClickListener(item, !isSelected)
+                notifyItemChanged(position)
             } else {
-                displayInfoList.add(position)
+                // 원래의 세부 정보 표시 기능
+                if (displayInfoList.contains(position)) {
+                    displayInfoList.remove(position)
+                } else {
+                    displayInfoList.add(position)
+                }
+                notifyItemChanged(position)
             }
-            notifyItemChanged(position)
         }
 
-        // 영양 정보 표시 여부에 따라 텍스트 설정
-        holder.textView.text = if (displayInfoList.contains(position)) {
+        // 텍스트 설정
+        holder.binding.textView.text = if (displayInfoList.contains(position)) {
             "칼로리: ${item.nutrients.calories}kcal\n탄수화물: ${item.nutrients.carbohydrates}g\n단백질: ${item.nutrients.protein}g\n지방: ${item.nutrients.fat}g"
         } else {
             "${item.name}\n${item.weight}\n${item.expiration_date}"
         }
 
-        // isFreezed 값에 따라 배경 설정
-        if (item.isFreezed) {
-            holder.itemView.setBackgroundResource(R.drawable.card_background)
+        // 선택된 아이템 표시
+        if (isEditMode) {
+            holder.binding.root.setBackgroundResource(
+                if (selectedItems.contains(item)) R.drawable.card_background_selected
+                else R.drawable.card_background_s
+            )
         } else {
-            holder.itemView.setBackgroundResource(R.drawable.card_background_nengjang)
+            // isFreezed 값에 따라 배경 설정 (기본 배경)
+            if (item.isFreezed) {
+                holder.binding.root.setBackgroundResource(R.drawable.card_background)
+            } else {
+                holder.binding.root.setBackgroundResource(R.drawable.card_background_nengjang)
+            }
         }
     }
 
     override fun getItemCount(): Int {
         return dataList.size
+    }
+
+    fun setEditMode(isEditMode: Boolean) {
+        this.isEditMode = isEditMode
+        selectedItems.clear()
+        notifyDataSetChanged()
+    }
+
+    fun getSelectedItems(): List<Ingredients> {
+        return selectedItems.toList()
+    }
+
+    fun updateData(newIngredients: List<Ingredients>) {
+        this.dataList = newIngredients
+        selectedItems.clear()
+        notifyDataSetChanged()
+    }
+
+    fun toggleSelection(ingredient: Ingredients, isChecked: Boolean) {
+        if (isChecked) {
+            selectedItems.add(ingredient)
+        } else {
+            selectedItems.remove(ingredient)
+        }
     }
 }
