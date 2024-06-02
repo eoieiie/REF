@@ -54,7 +54,9 @@ AI 기반 냉장고 식재료 관리 서비스, 레프
 [서버 API](https://tremendous-waiter-41f.notion.site/REF-API-c72f2e5fb89648bda2352558ceab1584?pvs=4)
 
 ### 서비스 구성도
-![서비스 구성도](https://github.com/zxcvb2002/Project/assets/122873008/506acb8b-c0f2-4c87-8dc3-8184e9efd6d0)
+
+![서비스 구성도](https://github.com/zxcvb2002/Project/assets/122873008/72d0c0ab-aacc-4c11-a0d2-a8b358850682)
+
 
 ## Git
 
