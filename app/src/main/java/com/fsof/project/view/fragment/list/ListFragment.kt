@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.fsof.project.databinding.FragmentListBinding
-
 import com.fsof.project.model.datasource.IngredientDatabase
+import com.fsof.project.model.entity.Ingredients
 import com.fsof.project.view.adapter.Adapter
 
 class ListFragment : Fragment() {

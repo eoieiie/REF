@@ -46,8 +46,8 @@ class CameraActivity : AppCompatActivity() {
 
     private val dateFormat = SimpleDateFormat("yy-MM-dd", Locale.getDefault())
 
-    private lateinit var name: String // = ""
-    private lateinit var weight: String // = ""
+    private lateinit var name: String
+    private lateinit var weight: String
     private var isFreezed: Boolean = false
     private var up: String = dateFormat.format(Calendar.getInstance().time)
     private var expiration: String = dateFormat.format(Calendar.getInstance().time)
@@ -80,12 +80,10 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun launchCamera() {
-//        binding.btnTakePhoto.setOnClickListener {
-            getTmpFileUri().let { uri ->
-                imageUri = uri
-                cameraResult.launch(uri)
-            }
-//        }
+        getTmpFileUri().let { uri ->
+            imageUri = uri
+            cameraResult.launch(uri)
+        }
     }
 
     private fun setFreezed() {
@@ -94,11 +92,10 @@ class CameraActivity : AppCompatActivity() {
                 R.id.rightRadioButton -> {
                     isFreezed = true
                 }
-                R.id.rightRadioButton -> {
+                R.id.leftRadioButton -> {
                     isFreezed = false
                 }
             }
-            // Log.d("Radio", "$isFreezed")
         }
     }
 
@@ -173,13 +170,7 @@ class CameraActivity : AppCompatActivity() {
     }
 
     private fun saveDataAndReturn() {
-        Log.d("API", "${IngredientInfo(name = name, weight = weight, isFreezed = false, up_date = up, expiration_date = expiration)}")
-
-//        if (binding.editStock.text.toString() != "") { // 재고 입력 없을 경우 걸러주기
-            createNutrients(IngredientInfo(name = name, weight = weight, isFreezed = false, up_date = up, expiration_date = expiration))
-//        } else {
-//            Toast.makeText(this, "재고를 입력해주세요.", Toast.LENGTH_SHORT).show()
-//        }
+        createNutrients(IngredientInfo(name = name, weight = weight, isFreezed = isFreezed, up_date = up, expiration_date = expiration))
     }
 
     private fun createNutrients(input: IngredientInfo) {
