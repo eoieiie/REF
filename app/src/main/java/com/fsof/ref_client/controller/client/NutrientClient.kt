@@ -2,7 +2,7 @@ package com.fsof.ref_client.controller.client
 
 import com.fsof.ref_client.controller.service.NutrientService
 import retrofit2.Retrofit
-import com.fsof.ref_client.utils.APIs
+import com.fsof.ref_client.util.APIs
 import retrofit2.converter.gson.GsonConverterFactory
 
 object NutrientClient {

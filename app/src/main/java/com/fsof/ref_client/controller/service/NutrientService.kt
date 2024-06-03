@@ -1,6 +1,6 @@
 package com.fsof.ref_client.controller.service
 
-import com.fsof.ref_client.utils.APIs
+import com.fsof.ref_client.util.APIs
 import retrofit2.Call
 import retrofit2.http.Body
 import retrofit2.http.POST

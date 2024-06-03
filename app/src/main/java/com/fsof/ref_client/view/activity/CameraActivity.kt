@@ -13,14 +13,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.FileProvider
 import com.fsof.ref_client.controller.camera.Classifier
 import com.fsof.ref_client.databinding.ActivityCameraBinding
-import com.fsof.ref_client.utils.BuildConfig
+import com.fsof.ref_client.util.BuildConfig
 import com.fsof.ref_client.controller.NutrientController
 import com.fsof.ref_client.controller.client.NutrientClient
 import com.fsof.ref_client.model.entity.Ingredients
 import com.fsof.ref_client.model.entity.IngredientInfo
 import com.fsof.ref_client.model.datasource.IngredientDatabase
 import com.fsof.ref_client.model.repository.NutrientRepository
-import com.fsof.ref_client.utils.TFLite
+import com.fsof.ref_client.util.TFLite
 import java.io.File
 import java.io.IOException
 import java.text.SimpleDateFormat

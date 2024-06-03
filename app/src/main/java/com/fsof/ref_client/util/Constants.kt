@@ -1,4 +1,4 @@
-package com.fsof.ref_client.utils
+package com.fsof.ref_client.util
 
 object APIs {
     const val BASE_URL: String = "https://port-0-ref-server-1mrfs72llwxvw3wk.sel5.cloudtype.app/" // "http://10.0.2.2:8000/"
