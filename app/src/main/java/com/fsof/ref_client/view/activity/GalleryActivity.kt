@@ -11,7 +11,7 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.fsof.ref_client.databinding.ActivityGalleryBinding
 import com.fsof.ref_client.controller.camera.Classifier
-import com.fsof.ref_client.utils.TFLite
+import com.fsof.ref_client.util.TFLite
 import java.io.IOException
 import java.util.*
 

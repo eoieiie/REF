@@ -10,11 +10,9 @@ import android.content.pm.PackageManager
 import android.os.Build
 import android.os.Bundle
 import android.util.Log
-import android.widget.ImageButton
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
-import com.fsof.ref_client.R
 import com.fsof.ref_client.controller.alarm.AlarmReceiver
 import com.fsof.ref_client.databinding.ActivityAlarmBinding
 import com.fsof.ref_client.model.datasource.IngredientDatabase
@@ -42,15 +40,6 @@ class AlarmActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-        setContentView(R.layout.activity_alarm)  // XML 레이아웃을 설정
-
-        // btnBack0 이미지 버튼의 참조를 얻어옵니다.
-        val btnBack = findViewById<ImageButton>(R.id.btnBack0)
-        // btnBack0에 클릭 리스너를 설정합니다.
-        btnBack.setOnClickListener {
-            // 버튼 클릭 시 현재 액티비티를 종료하고 이전 화면으로 돌아갑니다.
-            finish()
-        }
         alarmManager = getSystemService(ALARM_SERVICE) as AlarmManager
         sharedPreferences = getSharedPreferences("sharedPreferences", Context.MODE_PRIVATE)
         ingredientDatabase = IngredientDatabase.getInstance(this)
@@ -59,6 +48,7 @@ class AlarmActivity : AppCompatActivity() {
         initCalendar()
         isToggleChanged()
         isTimePickerChanged()
+        back()
     }
 
     private fun accessPermission() {
@@ -119,7 +109,7 @@ class AlarmActivity : AppCompatActivity() {
             set(Calendar.HOUR_OF_DAY, binding.timePicker.hour)
             set(Calendar.MINUTE, binding.timePicker.minute)
             set(Calendar.SECOND, 0)
-            add(Calendar.DAY_OF_MONTH, -3) // 소비기한 알람을 D-3 으로 설정
+            add(Calendar.DAY_OF_MONTH, 0) // 소비기한 알람을 D-3 으로 설정
         }
 
         val intent = Intent(this, AlarmReceiver::class.java).apply {
@@ -166,5 +156,11 @@ class AlarmActivity : AppCompatActivity() {
 
     private fun getAlarmState(): Boolean {
         return sharedPreferences.getBoolean("alarm_enabled", false)
+    }
+
+    private fun back() {
+        binding.btnBack0.setOnClickListener {
+            finish()
+        }
     }
 }

@@ -10,9 +10,9 @@ import android.graphics.Color
 import androidx.core.app.NotificationCompat
 
 import com.fsof.ref_client.R
-import com.fsof.ref_client.utils.Alarm.CHANNEL_ID
-import com.fsof.ref_client.utils.Alarm.CHANNEL_NAME
-import com.fsof.ref_client.utils.Alarm.NOTIFICATION_ID
+import com.fsof.ref_client.util.Alarm.CHANNEL_ID
+import com.fsof.ref_client.util.Alarm.CHANNEL_NAME
+import com.fsof.ref_client.util.Alarm.NOTIFICATION_ID
 import com.fsof.ref_client.view.activity.AlarmActivity
 
 class AlarmReceiver : BroadcastReceiver() {

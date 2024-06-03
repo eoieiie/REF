@@ -2,7 +2,7 @@ package com.fsof.ref_client.controller.camera
 
 import android.content.Context
 import android.graphics.Bitmap
-import com.fsof.ref_client.utils.TFLite
+import com.fsof.ref_client.util.TFLite
 import org.tensorflow.lite.support.common.FileUtil
 import org.tensorflow.lite.support.common.ops.NormalizeOp
 import org.tensorflow.lite.support.image.ImageProcessor
